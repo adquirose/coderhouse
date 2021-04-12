@@ -1,9 +1,12 @@
 import Styled from "styled-components";
+import { ColorText, ColorNav } from '../../constants'
 
 export const NavContainer = Styled.div`
+    grid-row:top/row1;
+    grid-column:izq/der;
     width:100vw;
-    height:100px;
-    background:#785E60;
+    height:100%;
+    background:${ColorNav};
     display:grid;
     grid-template:[top] 60px [row1] 40px [bottom] / [izq] 1fr [col1] minmax(420px,1.4fr) [col2] 1fr [der];
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
@@ -15,8 +18,10 @@ export const Nav = Styled.ul`
     grid-column: ${props => props.column};
     grid-template:[top] 1fr [bottom] / [izq] 100px [col1] 100px [col2] 100px [der]; 
     justify-items:center;
+    align-items:center;
     padding-left:0;
     margin:0;
+    height:100%;
 `;
 export const Item = Styled.li`
     list-style-type:none;
@@ -25,7 +30,7 @@ export const Item = Styled.li`
 export const Link = Styled.a`
     font-size:1rem;
     cursor:pointer;
-    color:white;
+    color:${ColorText};
 `;
 export const Input = Styled.input`
     grid-column:izq/col1;
@@ -48,7 +53,7 @@ export const InputGroup = Styled.div`
 `;
 export const Button = Styled.button`
     border:0;
-    background:white;
+    background:${ColorText};
     border-left:1px solid gray;
     grid-column:col1/der;
     grid-row:top/bottom;

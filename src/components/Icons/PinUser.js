@@ -1,5 +1,5 @@
 import React from "react";
-import Icon from './index'
+import Icon from './Icon'
 function PinUser(props) {
   return (
     <Icon size={props.size} color={props.color}>

@@ -1,15 +1,7 @@
-import React from 'react'
+import Icon from './Icon'
+import PinUser from './PinUser'
+import Search from './Search'
+import ShoppingCart from './ShopingCart'
 
-function Icon(props) {
-    return (
-      <svg
-        height={props.size}
-        width={props.size}
-        viewBox="0 0 48 48"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {props.children}
-      </svg>
-    );
-}
 export default Icon
+export {PinUser, Search, ShoppingCart}

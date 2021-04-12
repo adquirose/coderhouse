@@ -1,10 +1,11 @@
 import React from 'react'
 import { Nav, NavContainer, Item, Link, Input, InputGroup, Button } from './styles.js'
-// import PinUser from '../Icons/PinUser'
-import Search from '../Icons/Search'
+import { ShoppingCart, Search } from '../Icons'
+
 function Navbar(){
     return(
         <NavContainer>
+            <div>LOGO</div>
             <InputGroup>
                 <Input placeholder="Buscar productos, marcas y más..."/>
                 <Button
@@ -30,6 +31,11 @@ function Navbar(){
                 </Item>
                 <Item>
                     <Link>Ingresa</Link>
+                </Item>
+                <Item>
+                    <Link>
+                        <ShoppingCart size="25" color="white"/>
+                    </Link>
                 </Item>
             </Nav>
         </NavContainer>
