@@ -1,4 +1,4 @@
-<img src="/public/inicio.png" alt="My cool logo"/>
+<img src="/public/captura.jpg" alt="img-captura"/>
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -69,3 +69,29 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### File Structure
+
+# src
+
+* [components/](./src/components)
+  * [Card/](./src/components/Card)
+    * [index.js](./src/components/Card/index.js)
+  * [Icons/](./src/components/Icons)
+    * [Icon.js](./src/components/Icons/Icon.js)
+    * [PinUser.js](./src/components/Icons/PinUser.js)
+    * [Search.js](./src/components/Icons/Search.js)
+    * [ShopingCart.js](./src/components/Icons/ShopingCart.js)
+    * [index.js](./src/components/Icons/index.js)
+  * [Items/](./src/components/Items)
+    * [index.js](./src/components/Items/index.js)
+    * [styles.js](./src/components/Items/styles.js)
+  * [Navbar/](./src/components/Navbar)
+    * [index.js](./src/components/Navbar/index.js)
+    * [styles.js](./src/components/Navbar/styles.js)
+* [constants/](./src/constants)
+  * [index.js](./src/constants/index.js)
+* [theme/](./src/theme)
+  * [globalStyle.js](./src/theme/globalStyle.js)
+* [App.js](./src/App.js)
+* [index.js](./src/index.js)
