@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import Navbar from './components/Navbar'
-import Items from './components/Items'
+import ItemListContainer from './components/ItemList'
 import GlobalStyle from './theme/globalStyle'
 import Styled from 'styled-components'
 
@@ -16,9 +16,7 @@ function App() {
       <GlobalStyle/>
       <AppContainer>
         <Navbar />
-        <Items>
-          <h1>Aca se listan los productos</h1>
-        </Items>
+        <ItemListContainer />
       </AppContainer>
     </Fragment>
   );
