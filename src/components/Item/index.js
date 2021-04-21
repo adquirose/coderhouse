@@ -1,10 +1,11 @@
 import React from 'react'
 import { ItemStyle } from './styles'
-
-function Item({children}){
+import ItemCount from '../ItemCount'
+function Item({children, stock}){
     return(
         <ItemStyle>
             {children}
+            <ItemCount stock={stock}/>
         </ItemStyle>
     )
 }

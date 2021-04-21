@@ -1,28 +1,45 @@
 import React, { useState, useEffect } from 'react'
 import Item from '../Item'
 import { ItemListStyle, ItemListContainerStyle } from './styles'
+import Loader from '../Loader'
 const items = [
     {
         id:1,
-        name:"Arturo"
+        name:"Canelo",
+        stock:54
     },
     {
         id:2,
-        name:"Andrea"
+        name:"Cipres",
+        stock:5
     },
     {
         id:3,
-        name:"Violeta"
+        name:"Alerce",
+        stock:3
     },
     {
         id:4,
-        name:"Olimpia"
+        name:"Raulí",
+        stock:4
     },
     {
         id:5,
-        name:"Mila"
+        name:"Ñirre",
+        stock:4
+    },
+    {
+        id:6,
+        name:"Notro",
+        stock:4
+    },
+    {
+        id:7,
+        name:"Avellano",
+        stock:5
     }
 ]
+
 function ItemListContainer(){
 
     const [data, setData] = useState([])
@@ -47,7 +64,7 @@ function ItemListContainer(){
     
     return(
         <ItemListContainerStyle>
-            { isLoading && <p>Cargando...</p> }
+            { isLoading && <Loader/> }
             { !isLoading && data.length && <ItemList data={data} /> }
         </ItemListContainerStyle>
     )
@@ -55,7 +72,7 @@ function ItemListContainer(){
 const ItemList = ({data}) => {
     return(
         <ItemListStyle>
-            { data.map( item => <Item key={item.id}>{item.name}</Item>) }
+            { data.map( item => <Item key={item.id} stock={item.stock}>{item.name}</Item>) }
         </ItemListStyle>
     )
 }
