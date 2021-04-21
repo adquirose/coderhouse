@@ -8,5 +8,5 @@ export const ItemStyle = Styled.div`
     height:320px;
     width:220px;
     border-radius:5px;
-    border:1px;
+    border:1px solid gray;
 `

@@ -10,11 +10,13 @@ const GlobalStyle = createGlobalStyle`
         sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        &::-webkit-scrollbar {display: none;}
     }
  
   code {
         font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
     }
+
 `
 export default GlobalStyle

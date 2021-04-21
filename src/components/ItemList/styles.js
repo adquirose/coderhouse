@@ -1,13 +1,25 @@
 import Styled from 'styled-components'
 
 export const ItemListStyle = Styled.div`
+    display:grid;
+    /* grid-template:[top] 1fr [bottom] / [izq] 240px [der]; */
+    grid-auto-flow:column;
+    grid-auto-column:240px;
     width:100%;
     height:400px;
-    background: gray;
     overflow-x:auto;
-    display:grid;
-    grid-template:[top] 1fr [bottom] / [izq] 225px [col1] 225px [col2] 225px [der];
+    justify-items:center;
+    grid-gap:8px;
+    /* background:blue; */
+
 `
 export const ItemListContainerStyle = Styled.div`
-    width:100vw;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:450px;
+    grid-column:col1/col2;
+    overflow-x:hidden;
+    &::-webkit-scrollbar {display: none;}
 `
