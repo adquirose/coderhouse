@@ -1,0 +1,37 @@
+export const items = [
+    {
+        id:1,
+        name:"Canelo",
+        stock:54
+    },
+    {
+        id:2,
+        name:"Cipres",
+        stock:5
+    },
+    {
+        id:3,
+        name:"Alerce",
+        stock:3
+    },
+    {
+        id:4,
+        name:"Raulí",
+        stock:4
+    },
+    {
+        id:5,
+        name:"Ñirre",
+        stock:4
+    },
+    {
+        id:6,
+        name:"Notro",
+        stock:4
+    },
+    {
+        id:7,
+        name:"Avellano",
+        stock:5
+    }
+]

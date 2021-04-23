@@ -9,13 +9,4 @@ export const ItemListStyle = Styled.div`
     justify-content:center;
     grid-gap:8px;
     /* background:blue; */
-
-`
-export const ItemListContainerStyle = Styled.div`
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width:100%;
-    height:450px;
-    grid-column:col1/col2;
 `

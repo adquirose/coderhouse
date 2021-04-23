@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import Navbar from './components/Navbar'
-import ItemListContainer from './components/ItemList'
+import ItemListContainer from './components/ItemListContainer'
 import GlobalStyle from './theme/globalStyle'
 import Styled from 'styled-components'
 
