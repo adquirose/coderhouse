@@ -1,11 +1,12 @@
 import React from 'react'
+// import { Link } from 'react-router-dom' 
 import { Nav, NavContainer, Item, Link, Input, InputGroup, Button } from './styles.js'
 import { ShoppingCart, Search } from '../Icons'
 
 function Navbar(){
     return(
         <NavContainer>
-            <div>LOGO</div>
+            <Link to="/">LOGO</Link>
             <InputGroup>
                 <Input placeholder="Buscar productos, marcas y más..."/>
                 <Button

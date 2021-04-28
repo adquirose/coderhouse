@@ -1,6 +1,8 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import ItemListContainer from './components/ItemListContainer'
+import ItemDetailContainer from './components/ItemDetailContainer'
 import GlobalStyle from './theme/globalStyle'
 import Styled from 'styled-components'
 
@@ -12,13 +14,23 @@ const AppContainer = Styled.div`
 `
 function App() {
   return (
-    <Fragment>
+    <BrowserRouter>
       <GlobalStyle/>
       <AppContainer>
         <Navbar />
-        <ItemListContainer />
+        <Switch>
+          <Route exact path="/">
+            <ItemListContainer />
+          </Route>
+          <Route path="/category/:id">
+            <ItemListContainer />
+          </Route>
+          <Route path="/item/:id">
+            <ItemDetailContainer />
+          </Route>
+        </Switch>
       </AppContainer>
-    </Fragment>
+    </BrowserRouter>
   );
 }
 export default App

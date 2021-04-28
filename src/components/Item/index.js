@@ -1,11 +1,16 @@
 import React from 'react'
-import { ItemStyle } from './styles'
-import ItemCount from '../ItemCount'
-function Item({children, stock}){
+import { Link } from 'react-router-dom'
+import { ItemStyle, ImageThumb, Span, LinkStyle } from './styles'
+import ItemCountContainer from '../ItemCountContainer'
+
+function Item({id, name, stock, srcImage}){
     return(
         <ItemStyle>
-            {children}
-            <ItemCount stock={stock}/>
+            <Link to={`/item/${id}`} style={LinkStyle}>
+               <ImageThumb src={srcImage}/>
+               <Span>{name}</Span>
+            </Link> 
+            <ItemCountContainer column="izq/der" row="row1/bottom" stock={stock}/>
         </ItemStyle>
     )
 }
