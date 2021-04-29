@@ -1,12 +1,12 @@
 import React from 'react'
 // import { Link } from 'react-router-dom' 
-import { Nav, NavContainer, Item, Link, Input, InputGroup, Button } from './styles.js'
+import { Nav, NavContainer, Item, LinkStyled, Input, InputGroup, Button } from './styles.js'
 import { ShoppingCart, Search } from '../Icons'
 
 function Navbar(){
     return(
         <NavContainer>
-            <Link to="/">LOGO</Link>
+            <LinkStyled to="/">LOGO</LinkStyled>
             <InputGroup>
                 <Input placeholder="Buscar productos, marcas y más..."/>
                 <Button
@@ -17,26 +17,26 @@ function Navbar(){
             </InputGroup>
             <Nav row="row1/bottom" column="col1/col2">
                <Item>
-                   <Link>Categorias</Link>
+                   <LinkStyled to="/category/semillas">Semillas</LinkStyled>
                 </Item>
                 <Item>
-                   <Link>Ofertas</Link>
+                   <LinkStyled to="/category/plantas">Plantas</LinkStyled>
                 </Item>
                 <Item>
-                   <Link>Productos</Link>
+                   <LinkStyled to="/category/arboles">Arboles</LinkStyled>
                 </Item>
             </Nav>
             <Nav row="row1/bottom" column="col2/der">
                 <Item>
-                    <Link>Crear cuenta</Link>
+                    <LinkStyled to="/">Crear cuenta</LinkStyled>
                 </Item>
                 <Item>
-                    <Link>Ingresa</Link>
+                    <LinkStyled to="/" >Ingresa</LinkStyled>
                 </Item>
                 <Item>
-                    <Link>
+                    <LinkStyled to="/">
                         <ShoppingCart size="25" color="white"/>
-                    </Link>
+                    </LinkStyled>
                 </Item>
             </Nav>
         </NavContainer>

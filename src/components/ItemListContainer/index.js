@@ -3,10 +3,12 @@ import ItemList from '../ItemList'
 import Loader from '../Loader'
 import { ItemListContainerStyle } from './styles.js'
 import { items } from '../../constants/items'
+import { useParams } from 'react-router-dom'
 
 function ItemListContainer(){
+    const { id } = useParams()
     const [data, setData] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false) 
     const promesa = () => {
         return(
             new Promise((resolve, reject) => {
@@ -17,17 +19,18 @@ function ItemListContainer(){
                 },2000)
             })
         )
-    } 
-    useEffect(() => {
+    }   
+    useEffect(() => { 
         promesa().then((res) => {
-            setData(res)
-            setIsLoading(false)
-            console.log('se han recibido los datos')
+            !id ? setData(res)  : setData(res.filter(item => item.category === id))
+            setIsLoading(false) 
         })
-        .catch(err => {
+        .catch(error => {
             setIsLoading(false)
+            console.log(`ha ocurrido un error ${error}`)
         })
-    },[])
+    },[id])
+
     return(
         <ItemListContainerStyle>
             { isLoading && <Loader/> }

@@ -10,7 +10,6 @@ export const ItemDetailStyle = Styled.div`
 export const ImageDetail = Styled.img`
     grid-row:row1/row3;
     grid-column:col1/col2;
-    background:orange;
     width:100%;
     height:100%;
 `

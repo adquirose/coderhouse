@@ -1,4 +1,5 @@
 import Styled from "styled-components";
+import { Link } from 'react-router-dom'
 import { ColorText, ColorNav } from '../../constants'
 
 export const NavContainer = Styled.div`
@@ -27,10 +28,11 @@ export const Item = Styled.li`
     list-style-type:none;
     text-align:center;
 `;
-export const Link = Styled.a`
+export const LinkStyled = Styled(Link)`
     font-size:1rem;
     cursor:pointer;
     color:${ColorText};
+    text-decoration:none;
 `;
 export const Input = Styled.input`
     grid-column:izq/col1;
