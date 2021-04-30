@@ -1,7 +1,8 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     body {
+        min-height:100vh;
         margin: 0;
         padding: 0;
         background-color:lightgray;
@@ -18,5 +19,5 @@ const GlobalStyle = createGlobalStyle`
         monospace;
     }
 
-`
-export default GlobalStyle
+`;
+export default GlobalStyle;

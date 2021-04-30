@@ -1,96 +1,51 @@
-<img src="/public/captura.jpg" alt="img-captura"/>
-# Getting Started with Create React App
+## Proyecto e-Comerce
+![Alt Text](./src/assets/ecomerce.gif)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Dependencias adicionales 
+** styled-components (https://www.npmjs.com/package/styled-components)
 
-## Available Scripts
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-### File Structure
-
+## Estructura de Archivos
 # src
 
+* [assets/](./src/assets)
+  * [images/](./src/assets/images)
 * [components/](./src/components)
-  * [Card/](./src/components/Card)
-    * [index.js](./src/components/Card/index.js)
   * [Icons/](./src/components/Icons)
+    * [Heart.js](./src/components/Icons/Heart.js)
     * [Icon.js](./src/components/Icons/Icon.js)
+    * [LeftArrow.js](./src/components/Icons/LeftArrow.js)
     * [PinUser.js](./src/components/Icons/PinUser.js)
     * [Search.js](./src/components/Icons/Search.js)
     * [ShopingCart.js](./src/components/Icons/ShopingCart.js)
     * [index.js](./src/components/Icons/index.js)
-  * [Items/](./src/components/Items)
-    * [index.js](./src/components/Items/index.js)
-    * [styles.js](./src/components/Items/styles.js)
+  * [Item/](./src/components/Item)
+    * [index.js](./src/components/Item/index.js)
+    * [styles.js](./src/components/Item/styles.js)
+  * [ItemCount/](./src/components/ItemCount)
+    * [index.js](./src/components/ItemCount/index.js)
+    * [styles.js](./src/components/ItemCount/styles.js)
+  * [ItemCountContainer/](./src/components/ItemCountContainer)
+    * [index.js](./src/components/ItemCountContainer/index.js)
+  * [ItemDetail/](./src/components/ItemDetail)
+    * [index.js](./src/components/ItemDetail/index.js)
+    * [styles.js](./src/components/ItemDetail/styles.js)
+  * [ItemDetailContainer/](./src/components/ItemDetailContainer)
+    * [index.js](./src/components/ItemDetailContainer/index.js)
+  * [ItemList/](./src/components/ItemList)
+    * [index.js](./src/components/ItemList/index.js)
+    * [styles.js](./src/components/ItemList/styles.js)
+  * [ItemListContainer/](./src/components/ItemListContainer)
+    * [index.js](./src/components/ItemListContainer/index.js)
+    * [styles.js](./src/components/ItemListContainer/styles.js)
+  * [Loader/](./src/components/Loader)
+    * [index.js](./src/components/Loader/index.js)
+    * [styles.css](./src/components/Loader/styles.css)
   * [Navbar/](./src/components/Navbar)
     * [index.js](./src/components/Navbar/index.js)
     * [styles.js](./src/components/Navbar/styles.js)
 * [constants/](./src/constants)
-  * [index.js](./src/constants/index.js)
+  * [items.js](./src/constants/items.js)
 * [theme/](./src/theme)
   * [globalStyle.js](./src/theme/globalStyle.js)
 * [App.js](./src/App.js)

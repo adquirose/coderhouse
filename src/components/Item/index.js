@@ -1,18 +1,31 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { ItemStyle, ImageThumb, Span, LinkStyle } from './styles'
-import ItemCountContainer from '../ItemCountContainer'
+import React from "react";
+import {
+	ItemStyle,
+	ImageThumb,
+	Span,
+	ButtonGroup,
+	TextGroup,
+	Button,
+	LinkStyled,
+} from "./styles";
+import ItemCountContainer from "../ItemCountContainer";
 
-function Item({id, name, stock, srcImage, valor}){
-    return(
-        <ItemStyle>
-            <Link to={`/item/${id}`} style={LinkStyle}>
-               <ImageThumb src={srcImage}/>
-               <Span>{name}</Span>
-               <Span>${valor}</Span>
-            </Link> 
-            <ItemCountContainer column="izq/der" row="row1/bottom" stock={stock}/>
-        </ItemStyle>
-    )
+function Item({ id, name, stock, srcImage, valor }) {
+	return (
+		<ItemStyle>
+			<ImageThumb src={srcImage} />
+			<TextGroup>
+				<Span>{name}</Span>
+				<Span size="1rem">valor: ${valor}</Span>
+			</TextGroup>
+			<ItemCountContainer column="izq/der" row="row2/row3" stock={stock} />
+			<ButtonGroup>
+				<Button>Agregar al Carro</Button>
+				<Button>
+					<LinkStyled to={`/item/${id}`}>Ver Más</LinkStyled>
+				</Button>
+			</ButtonGroup>
+		</ItemStyle>
+	);
 }
-export default Item
+export default Item;

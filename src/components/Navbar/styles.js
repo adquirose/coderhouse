@@ -1,13 +1,12 @@
 import Styled from "styled-components";
-import { Link } from 'react-router-dom'
-import { ColorText, ColorNav } from '../../constants'
+import { Link } from "react-router-dom";
 
 export const NavContainer = Styled.div`
     grid-row:top/row1;
     grid-column:izq/der;
     width:100vw;
     height:100%;
-    background:${ColorNav};
+    background:#1B998B;
     display:grid;
     grid-template:[top] 60px [row1] 40px [bottom] / [izq] 1fr [col1] minmax(420px,1.4fr) [col2] 1fr [der];
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
@@ -15,8 +14,8 @@ export const NavContainer = Styled.div`
 `;
 export const Nav = Styled.ul`
     display:grid;
-    grid-row: ${props => props.row};
-    grid-column: ${props => props.column};
+    grid-row: ${(props) => props.row};
+    grid-column: ${(props) => props.column};
     grid-template:[top] 1fr [bottom] / [izq] 100px [col1] 100px [col2] 100px [der]; 
     justify-items:center;
     align-items:center;
@@ -31,7 +30,7 @@ export const Item = Styled.li`
 export const LinkStyled = Styled(Link)`
     font-size:1rem;
     cursor:pointer;
-    color:${ColorText};
+    color:white;
     text-decoration:none;
 `;
 export const Input = Styled.input`
@@ -55,7 +54,7 @@ export const InputGroup = Styled.div`
 `;
 export const Button = Styled.button`
     border:0;
-    background:${ColorText};
+    background:white;
     border-left:1px solid gray;
     grid-column:col1/der;
     grid-row:top/bottom;
@@ -63,4 +62,4 @@ export const Button = Styled.button`
     &:focus{
         outline:none !important;
     }
-` 
+`;
