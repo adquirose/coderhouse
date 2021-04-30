@@ -1,38 +1,60 @@
-import Styled from 'styled-components'
-import { ColorGrayLight } from '../../constants'
+import Styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const ItemStyle = Styled.div`
     display:grid;
-    grid-template:[top] 220px [row1] 1fr [bottom]/[izq] 1fr [der]; 
-    background:${ColorGrayLight};
+    grid-template:[top] 180px [row1] 60px [row2] 60px [row3] 40px [bottom]/[izq] 1fr [der]; 
+    background:white;
     justify-self:center;
-    align-self:center;
-    height:320px;
-    width:220px;
+    height:345px;
+    width:230px;
     padding:5px;
-    border-radius:5px;
+    margin-top:40px;
+    border-radius:0;
     border:0;
     box-shadow:0 2px 8px 1px gray;
     &:hover{
         box-shadow:0 1px 3px 2px gray;
     }
-`
+`;
 export const ImageThumb = Styled.img`
     display:grid;
-    border-radius:50%;
-    width:160px;
-    height:160px;
+    width:100%;
+    height:180px;
     margin: auto;
     justify-items:center;
-`
+    object-fit: cover;
+`;
 export const Span = Styled.span`
     display:grid;   
-    font-size:1.5rem;
-    color:gray;
+    font-size:${(props) => (props.size ? props.size : "1.2rem")};
+    color:#494a4b;
     justify-items:center;
-    margin-top:10px;
-`
-export const LinkStyle = {
-    textDecoration:'none',
-    color:'gray'
-}
+    margin-top:5px;
+    grid-row:${(props) => (props.row ? props.row : null)};
+`;
+export const TextGroup = Styled.div`
+    display:grid;
+    height:100%;
+    width:100%;
+    grid-row:${(props) => (props.row ? props.row : null)};
+`;
+export const ButtonGroup = Styled.div`
+    display:flex;
+    height:100;
+    width:100%;
+    justify-content:space-around;
+    align-items:center;
+`;
+export const Button = Styled.button`
+    padding:7px;
+    background:#1B998B;
+    color:white;
+    font-weight:700;
+    border:0;
+    height:30px;
+`;
+export const LinkStyled = Styled(Link)`
+    color:white;
+    text-decoration:none;
+`;
