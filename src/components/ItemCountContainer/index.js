@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ItemCount from "../ItemCount";
 
 function ItemCountContainer(props) {
 	const [counter, setCounter] = useState(0);
 	const [stockItem, setStockItem] = useState(props.stock);
 
-	const onAdd = () => {
+	const onCantidad = () => {
 		if (counter < props.stock) {
 			setCounter(counter + 1);
 			setStockItem(stockItem - 1);
@@ -24,7 +24,8 @@ function ItemCountContainer(props) {
 	return (
 		<ItemCount
 			{...props}
-			onAdd={onAdd}
+			onCantidad={onCantidad}
+			onAdd={props.onAdd}
 			onSub={onSub}
 			counter={counter}
 			stockItem={stockItem}

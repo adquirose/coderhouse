@@ -20,7 +20,6 @@ function Item({ id, name, stock, srcImage, valor }) {
 			</TextGroup>
 			<ItemCountContainer column="izq/der" row="row2/row3" stock={stock} />
 			<ButtonGroup>
-				<Button>Agregar al Carro</Button>
 				<Button>
 					<LinkStyled to={`/item/${id}`}>Ver Más</LinkStyled>
 				</Button>

@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import CartContextProvider from './components/CartContext'
 import Navbar from "./components/Navbar";
 import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
@@ -16,23 +17,25 @@ const AppContainer = Styled.div`
 `;
 function App() {
 	return (
-		<BrowserRouter>
-			<GlobalStyle />
-			<AppContainer>
-				<Navbar />
-				<Switch>
-					<Route exact path="/">
-						<ItemListContainer />
-					</Route>
-					<Route path="/item/:id">
-						<ItemDetailContainer />
-					</Route>
-					<Route path="/category/:id">
-						<ItemListContainer />
-					</Route>
-				</Switch>
-			</AppContainer>
-		</BrowserRouter>
+		<CartContextProvider>
+			<BrowserRouter>
+				<GlobalStyle />
+				<AppContainer>
+					<Navbar />
+					<Switch>
+						<Route exact path="/">
+							<ItemListContainer />
+						</Route>
+						<Route path="/item/:id">
+							<ItemDetailContainer />
+						</Route>
+						<Route path="/category/:id">
+							<ItemListContainer />
+						</Route>
+					</Switch>
+				</AppContainer>
+			</BrowserRouter>
+		</CartContextProvider>
 	);
 }
 export default App;

@@ -1,22 +1,11 @@
 import React from "react";
 import ItemCountContainer from "../ItemCountContainer";
-import {
-	Card,
-	Nav,
-	Photo,
-	Description,
-	H1,
-	H2,
-	H4,
-	P,
-	ButtonGroup,
-	Button,
-	Image,
-	Span,
-	LinkStyled,
-} from "./styles";
+
+import { Card, Nav, Photo, Description, H1, H2, H4, P, ButtonGroup, Image, Span, LinkStyled } from "./styles";
 import { Heart, LeftArrow } from "../Icons";
-const ItemDetail = ({ name, description, stock, srcImage, valor }) => {
+
+const ItemDetail = ({ name, description, stock, srcImage, valor, onAdd, id }) => {
+	
 	return (
 		<Card>
 			<Nav>
@@ -35,8 +24,7 @@ const ItemDetail = ({ name, description, stock, srcImage, valor }) => {
 				<H1>${valor}</H1>
 				<P>{description}</P>
 				<ButtonGroup>
-					<Button>Agregar al Carro</Button>
-					<ItemCountContainer stock={stock} />
+					<ItemCountContainer stock={stock} onAdd={onAdd} name={name} id={id}/>
 				</ButtonGroup>
 			</Description>
 		</Card>
