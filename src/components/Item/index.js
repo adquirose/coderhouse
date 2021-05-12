@@ -8,7 +8,7 @@ import {
 	Button,
 	LinkStyled,
 } from "./styles";
-import ItemCountContainer from "../ItemCountContainer";
+// import ItemCountContainer from "../ItemCountContainer";
 
 function Item({ id, name, stock, srcImage, valor }) {
 	return (
@@ -18,7 +18,7 @@ function Item({ id, name, stock, srcImage, valor }) {
 				<Span>{name}</Span>
 				<Span size="1rem">valor: ${valor}</Span>
 			</TextGroup>
-			<ItemCountContainer column="izq/der" row="row2/row3" stock={stock} />
+			{/* <ItemCountContainer column="izq/der" row="row2/row3" stock={stock} /> */}
 			<ButtonGroup>
 				<Button>
 					<LinkStyled to={`/item/${id}`}>Ver Más</LinkStyled>

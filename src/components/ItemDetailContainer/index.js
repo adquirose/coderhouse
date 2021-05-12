@@ -7,9 +7,9 @@ import { ItemListContainerStyle } from "../ItemListContainer/styles";
 import { CartContext } from '../CartContext'
 
 function ItemDetailContainer() {
-	const [addItem] = useContext(CartContext)
+	const {cart, addItem} = useContext(CartContext)
 	const { id } = useParams();
-	const [dataItem, setDataItem] = useState({});
+	const [dataItem, setDataItem] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const getItem = () => {
@@ -21,13 +21,13 @@ function ItemDetailContainer() {
 		});
 	};
 	const onAdd = counter => {
-		addItem( dataItem,counter)
+		addItem( dataItem[0], counter)
 	}
 	useEffect(() => {
 		getItem()
 			.then((res) => {
 				const itemFilter = res.filter((item) => item.id === id);
-				itemFilter ? setDataItem(itemFilter[0]) : setDataItem({});
+				itemFilter ? setDataItem(itemFilter) : setDataItem([]);
 				setIsLoading(false);
 			})
 			.catch((error) => console.log(error));
@@ -36,7 +36,7 @@ function ItemDetailContainer() {
 	return (
 		<ItemListContainerStyle>
 			{ isLoading && <Loader /> }
-			{ !isLoading && !!Object.keys(dataItem).length && <ItemDetail {...dataItem} onAdd={onAdd} />}
+			{ !isLoading && !!dataItem.length && <ItemDetail {...dataItem[0]} onAdd={onAdd} cart={cart}/>}
 		</ItemListContainerStyle>
 	);
 }

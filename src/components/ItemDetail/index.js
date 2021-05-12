@@ -1,10 +1,10 @@
 import React from "react";
 import ItemCountContainer from "../ItemCountContainer";
-
-import { Card, Nav, Photo, Description, H1, H2, H4, P, ButtonGroup, Image, Span, LinkStyled } from "./styles";
+import { Link } from 'react-router-dom'
+import { Button, Card, Nav, Photo, Description, H1, H2, H4, P, ButtonGroup, Image, Span, LinkStyled } from "./styles";
 import { Heart, LeftArrow } from "../Icons";
 
-const ItemDetail = ({ name, description, stock, srcImage, valor, onAdd, id }) => {
+const ItemDetail = ({ name, description, stock, srcImage, valor, onAdd, id, cart}) => {
 	
 	return (
 		<Card>
@@ -24,7 +24,14 @@ const ItemDetail = ({ name, description, stock, srcImage, valor, onAdd, id }) =>
 				<H1>${valor}</H1>
 				<P>{description}</P>
 				<ButtonGroup>
-					<ItemCountContainer stock={stock} onAdd={onAdd} name={name} id={id}/>
+					<ItemCountContainer stock={stock} onAdd={onAdd} name={name} id={id} cart={cart}/>
+					{ cart.length ? 
+						<Link to='/cart'>
+							<Button> 
+								Terminar Compra
+							</Button> 
+						</Link> : null
+					}
 				</ButtonGroup>
 			</Description>
 		</Card>

@@ -4,6 +4,7 @@ import CartContextProvider from './components/CartContext'
 import Navbar from "./components/Navbar";
 import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
+import Cart from './components/Cart'
 import GlobalStyle from "./theme/globalStyle";
 import Styled from "styled-components";
 
@@ -17,7 +18,7 @@ const AppContainer = Styled.div`
 `;
 function App() {
 	return (
-		<CartContextProvider>
+		<CartContextProvider value={[]}>
 			<BrowserRouter>
 				<GlobalStyle />
 				<AppContainer>
@@ -31,6 +32,9 @@ function App() {
 						</Route>
 						<Route path="/category/:id">
 							<ItemListContainer />
+						</Route>
+						<Route path="/cart">
+							<Cart />
 						</Route>
 					</Switch>
 				</AppContainer>

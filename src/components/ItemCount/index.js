@@ -34,6 +34,8 @@ function ItemCount({ counter, stockItem, column, row, onCantidad, onSub, onAdd }
 			>
 				Agregar al carro
 			</Button>
+			
+			
 		</ItemCountContainerStyle>
 	);
 }

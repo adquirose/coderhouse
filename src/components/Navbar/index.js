@@ -49,7 +49,7 @@ function Navbar() {
 					<LinkStyled to="/">Ingresa</LinkStyled>
 				</Item>
 				<Item>
-					<LinkStyled to="/">
+					<LinkStyled to="/cart">
 						<ShoppingCart size="25" color="white" />
 					</LinkStyled>
 				</Item>
