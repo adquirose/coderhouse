@@ -1,29 +1,37 @@
 ## Proyecto e-Comerce
 ![Alt Text](./src/assets/ecomerce.gif)
 ## Acerca
-* En el proyecto se trabaja con componentes presentacionales que reciben props y componentes funcionales que manejan el estado,
-haran llamadas asincronas, etc.
-por ejemplo: ItemDetailContainer.js maneja el estado y lo entrega al componente que recibe props ItemDetail.js
-* el manejo de las rutas estan hechas con la dependencia react-router-dom
+* Desafío CartContext
+* Desafío Sincronizar counter
 
 ## Dependencias adicionales 
 * styled-components CSS in JS  (https://www.npmjs.com/package/styled-components) 
-** "CSS-in-JS es un enfoque de estilo que abstrae el modelo CSS al nivel del componente, en lugar del nivel del documento. Esta es la idea de que CSS puede tener un  alcance solo para un componente específico y en contraposición al nivel del documento. Los beneficios de usar CSS-in-JS incluyen:
+  ** "CSS-in-JS es un enfoque de estilo que abstrae el modelo CSS al nivel del componente, en lugar del nivel del documento. Esta es la idea de que CSS puede tener un  alcance solo para un componente específico y en contraposición al nivel del documento. Los beneficios de usar CSS-in-JS incluyen:
 
-Reducir la cantidad de solicitudes HTTP: CSS-in-JS significaría que no tenemos que realizar solicitudes HTTP para cargar activos y recursos.
-Fragmentación de estilo: el uso de CSS-in-JS significa que puede escribir estilos libremente sin preocuparse por problemas de compatibilidad."
+  Reducir la cantidad de solicitudes HTTP: CSS-in-JS significaría que no tenemos que realizar solicitudes HTTP para cargar activos y recursos.
+  Fragmentación de estilo: el uso de CSS-in-JS significa que puede escribir estilos libremente sin preocuparse por problemas de compatibilidad."
 
 ## Estructura de Archivos
 ### src
 
+# src
+
 * [assets/](./src/assets)
   * [images/](./src/assets/images)
 * [components/](./src/components)
+  * [Cart/](./src/components/Cart)
+    * [index.js](./src/components/Cart/index.js)
+    * [styles.js](./src/components/Cart/styles.js)
+  * [CartContext/](./src/components/CartContext)
+    * [index.js](./src/components/CartContext/index.js)
   * [Icons/](./src/components/Icons)
+    * [ClearCart.js](./src/components/Icons/ClearCart.js)
     * [Heart.js](./src/components/Icons/Heart.js)
     * [Icon.js](./src/components/Icons/Icon.js)
     * [LeftArrow.js](./src/components/Icons/LeftArrow.js)
+    * [Money.js](./src/components/Icons/Money.js)
     * [PinUser.js](./src/components/Icons/PinUser.js)
+    * [Remove.js](./src/components/Icons/Remove.js)
     * [Search.js](./src/components/Icons/Search.js)
     * [ShopingCart.js](./src/components/Icons/ShopingCart.js)
     * [index.js](./src/components/Icons/index.js)
@@ -58,3 +66,4 @@ Fragmentación de estilo: el uso de CSS-in-JS significa que puede escribir estil
   * [globalStyle.js](./src/theme/globalStyle.js)
 * [App.js](./src/App.js)
 * [index.js](./src/index.js)
+

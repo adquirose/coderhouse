@@ -7,7 +7,7 @@ import { ItemListContainerStyle } from "../ItemListContainer/styles";
 import { CartContext } from '../CartContext'
 
 function ItemDetailContainer() {
-	const {cart, addItem} = useContext(CartContext)
+	const {cart, addItem, isInCart} = useContext(CartContext)
 	const { id } = useParams();
 	const [dataItem, setDataItem] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +36,7 @@ function ItemDetailContainer() {
 	return (
 		<ItemListContainerStyle>
 			{ isLoading && <Loader /> }
-			{ !isLoading && !!dataItem.length && <ItemDetail {...dataItem[0]} onAdd={onAdd} cart={cart}/>}
+			{ !isLoading && !!dataItem.length && <ItemDetail {...dataItem[0]} onAdd={onAdd} cart={cart} isInCart={isInCart}/>}
 		</ItemListContainerStyle>
 	);
 }

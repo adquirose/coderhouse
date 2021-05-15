@@ -41,10 +41,10 @@ export const items = [
 	},
 	{
 		id: "5",
-		name: "Ñirre",
+		name: "Lenga",
 		stock: 4,
 		description:
-			"Nothofagus antarctica —comúnmente llamado ñire, ​ ñirre o haya antártica— es un árbol caducifolio nativo del bosque andino patagónico desde la latitud 33° S hasta Tierra del Fuego.",
+			"Nothofagus antarctica —comúnmente llamado ñire, ​ ñirre o haya antártica— es un árbol caducifolio nativo del bosque",
 		valor: "2950",
 		srcImage: require("../assets/images/nirre.jpg").default,
 		category: "arboles",
@@ -64,7 +64,7 @@ export const items = [
 		name: "Avellano",
 		stock: 5,
 		description:
-			"Gevuina avellana es la única especie del género Gevuina, de la familia Proteaceae. La especie se conoce con los nombres vulgares de avellano o avellano chileno​ y es un árbol siempreverde monoico.",
+			"Gevuina avellana es la única especie del género Gevuina, de la familia Proteaceae. La especie se conoce con los nombres...",
 		valor: "1200",
 		srcImage: require("../assets/images/avellano.jpg").default,
 		category: "arboles",

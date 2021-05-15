@@ -5,13 +5,13 @@ function ItemCountContainer({stock, cart, onAdd, ...props}) {
 	const [counter, setCounter] = useState(0);
 	const [stockItem, setStockItem] = useState(stock);
 
-	const onCantidad = () => {
+	const onSumar = () => {
 		if (counter < stock) {
 			setCounter(counter + 1);
 			setStockItem(stockItem - 1);
 		}
 	};
-	const onSub = () => {
+	const onRestar = () => {
 		if (counter >= 1) {
 			setCounter(counter - 1);
 			setStockItem(stockItem + 1);
@@ -25,8 +25,8 @@ function ItemCountContainer({stock, cart, onAdd, ...props}) {
 	return (
 		<ItemCount
 			{...props}
-			onCantidad={onCantidad}
-			onSub={onSub}
+			onSumar={onSumar}
+			onRestar={onRestar}
 			counter={counter}
 			stockItem={stockItem}
 			onAdd={onAdd}

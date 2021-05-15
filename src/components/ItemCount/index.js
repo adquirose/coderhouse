@@ -1,7 +1,8 @@
 import React from "react";
+import { LinkStyled } from '../ItemDetail/styles'
 import { ItemCountContainerStyle, Button, Span } from "./styles";
 
-function ItemCount({ counter, stockItem, column, row, onCantidad, onSub, onAdd }) {
+function ItemCount({ counter, stockItem, column, row, onSumar, onRestar, onAdd, cart }) {
 	const isDisabledSub = counter === 0 ? true : false;
 	const isDisabledAdd = stockItem === 0 ? true : false;
 	return (
@@ -12,7 +13,7 @@ function ItemCount({ counter, stockItem, column, row, onCantidad, onSub, onAdd }
 
 			<Button
 				column="izq/col1"
-				onClick={onCantidad}
+				onClick={onSumar}
 				disabled={isDisabledAdd}
 				icon
 			>
@@ -23,7 +24,7 @@ function ItemCount({ counter, stockItem, column, row, onCantidad, onSub, onAdd }
 			</Span>
 			<Button
 				column="col2/der"
-				onClick={onSub}
+				onClick={onRestar}
 				disabled={isDisabledSub}
 				icon
 			>
@@ -34,8 +35,13 @@ function ItemCount({ counter, stockItem, column, row, onCantidad, onSub, onAdd }
 			>
 				Agregar al carro
 			</Button>
-			
-			
+			{cart.length > 0 &&
+				<Button> 
+					<LinkStyled to='/cart'>
+						Terminar Compra
+					</LinkStyled> 
+				</Button> 
+			}
 		</ItemCountContainerStyle>
 	);
 }

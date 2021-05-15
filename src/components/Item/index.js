@@ -21,7 +21,7 @@ function Item({ id, name, stock, srcImage, valor }) {
 			{/* <ItemCountContainer column="izq/der" row="row2/row3" stock={stock} /> */}
 			<ButtonGroup>
 				<Button>
-					<LinkStyled to={`/item/${id}`}>Ver Más</LinkStyled>
+					<LinkStyled to={`/item/${id}`}>Ver Detalle</LinkStyled>
 				</Button>
 			</ButtonGroup>
 		</ItemStyle>
