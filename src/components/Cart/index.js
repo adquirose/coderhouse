@@ -25,12 +25,12 @@ function Cart(){
                         </thead>
                         <tbody>
                             {cart.map( (item,index) => {
-                                const valor = formatter.format(item.valor)
-                                const subTotal = formatter.format(item.valor * item.quantity) 
+                                const valor = formatter.format(item.price)
+                                const subTotal = formatter.format(item.price * item.quantity) 
                                 return(
                                     <tr key={index}>
                                         <td>{item.id}</td>
-                                        <td>{item.name}</td>
+                                        <td>{item.title}</td>
                                         <td>$ {valor}</td>
                                         <td>{item.quantity}</td>
                                         <td>$ {subTotal}</td>

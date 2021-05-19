@@ -37,7 +37,7 @@ export default function CartContextProvider({ defaultValue = [], children }) {
 	const totalCompra = () => {
 		let acum = 0;
 		cart.forEach((item) => {
-			acum += item.quantity * item.valor;
+			acum += item.quantity * item.price;
 		});
 		return acum;
 	};

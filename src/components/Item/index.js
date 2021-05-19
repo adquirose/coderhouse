@@ -10,13 +10,13 @@ import {
 } from "./styles";
 // import ItemCountContainer from "../ItemCountContainer";
 
-function Item({ id, name, stock, srcImage, valor }) {
+function Item({ id, title, stock, image, price }) {
 	return (
 		<ItemStyle>
-			<ImageThumb src={srcImage} />
+			<ImageThumb src={image} />
 			<TextGroup>
-				<Span>{name}</Span>
-				<Span size="1rem">valor: ${valor}</Span>
+				<Span>{title}</Span>
+				<Span size="1rem">valor: ${price}</Span>
 			</TextGroup>
 			{/* <ItemCountContainer column="izq/der" row="row2/row3" stock={stock} /> */}
 			<ButtonGroup>

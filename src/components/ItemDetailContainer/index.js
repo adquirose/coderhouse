@@ -1,42 +1,43 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "../ItemDetail";
-import { items } from "../../constants/items";
 import Loader from "../Loader";
 import { ItemListContainerStyle } from "../ItemListContainer/styles";
 import { CartContext } from '../CartContext'
+import { getFirestore } from '../Firebase'
 
 function ItemDetailContainer() {
-	const {cart, addItem, isInCart} = useContext(CartContext)
+	const { cart, addItem, isInCart } = useContext(CartContext)
 	const { id } = useParams();
 	const [dataItem, setDataItem] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const getItem = () => {
-		return new Promise((resolve, reject) => {
-			setIsLoading(true);
-			setTimeout(() => {
-				resolve(items);
-			}, 2000);
-		});
-	};
 	const onAdd = counter => {
-		addItem( dataItem[0], counter)
+		addItem( dataItem, counter)
 	}
 	useEffect(() => {
-		getItem()
-			.then((res) => {
-				const itemFilter = res.filter((item) => item.id === id);
-				itemFilter ? setDataItem(itemFilter) : setDataItem([]);
-				setIsLoading(false);
+		const db = getFirestore()
+		const item = db.collection('items').doc(id)
+		item.get()
+			.then((doc) => {
+				if(!doc.exists){
+					console.log('items does not exist! :(')
+					return
+				}
+				console.log('item found!')
+				setDataItem({id: doc.id, ...doc.data()})
 			})
-			.catch((error) => console.log(error));
+			.catch((error) => {
+				console.log(error)
+			}).finally(() => {
+				setIsLoading(false)
+			})
 	}, [id]);
 
 	return (
 		<ItemListContainerStyle>
 			{ isLoading && <Loader /> }
-			{ !isLoading && !!dataItem.length && <ItemDetail {...dataItem[0]} onAdd={onAdd} cart={cart} isInCart={isInCart}/>}
+			{ !isLoading && dataItem && <ItemDetail {...dataItem} onAdd={onAdd} cart={cart} isInCart={isInCart}/> }
 		</ItemListContainerStyle>
 	);
 }
