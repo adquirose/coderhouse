@@ -70,10 +70,11 @@ export const P = Styled.p`
 export const Description = Styled.div`
   padding: 30px;
   float: left;
-  width: 55%;
+  width: 100%;
   border-left: 2px solid #efefef;
   grid-row: row1/bottom;
   grid-column: col1/der;
+  /* background:red; */
 `;
 export const Button = Styled.div`
   font-size:0.8rem;

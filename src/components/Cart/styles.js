@@ -39,7 +39,7 @@ export const Table = Styled.table`
     }
     tbody > tr > td {
         text-align:center;
-        padding: 5px 10px;
+        padding: 10px 10px;
         border:0;
     }
 `
@@ -80,7 +80,7 @@ export const H2 = Styled.h2`
 export const ButtonGroup = Styled.div`
     grid-row:top/bottom;
     grid-column:izq/col1;
-    background:white;
+    /* background:white; */
     display:flex;
     flex-direction:row;
 
@@ -90,10 +90,10 @@ export const Section = Styled.div`
     grid-template: [top] 100% [bottom] / [izq] 1fr [col1] 1fr [der];
     width:850px;
     height:150px;
-    grid-row:row2/bottom;
-    grid-column: col1/col2;
+    grid-row:${ props => props.row};
+    grid-column${ props => props.column};
     justify-self:center;
-    background:white;
+    /* background:white; */
     border-radius:2px;
     align-items:center;
 `

@@ -1,16 +1,13 @@
-import React from "react";
-import {
-	Nav,
-	NavContainer,
-	Item,
-	LinkStyled,
-	Input,
-	InputGroup,
-	Button,
-} from "./styles.js";
+import React, { useContext } from "react";
+import { Nav, NavContainer, Item, LinkStyled } from "./styles.js";
+import { Button, Badge, InputGroup, Input } from 'reactstrap'
 import { ShoppingCart, Search } from "../Icons";
 import Logo from "../../assets/images/logo.png";
+import { CartContext } from '../CartContext'
+
 function Navbar() {
+	const { totalItems } = useContext(CartContext)
+	
 	return (
 		<NavContainer>
 			<LinkStyled to="/">
@@ -27,7 +24,7 @@ function Navbar() {
 			<InputGroup>
 				<Input placeholder="Buscar semillas, hongos y más..." />
 				<Button onClick={() => alert("click button")}>
-					<Search size="25" color="gray" />
+					<Search size="25" color="white"/>
 				</Button>
 			</InputGroup>
 			<Nav row="row1/bottom" column="col1/col2">
@@ -48,11 +45,17 @@ function Navbar() {
 				<Item>
 					<LinkStyled to="/">Ingresa</LinkStyled>
 				</Item>
-				<Item>
-					<LinkStyled to="/cart">
-						<ShoppingCart size="25" color="white" />
-					</LinkStyled>
-				</Item>
+				{ totalItems() ? 
+					<Item>
+						<LinkStyled to="/cart">
+							<Button color="primary">
+								<ShoppingCart size="20" color="white"/> 
+								<Badge color="secondary">{totalItems()}</Badge>
+							</Button>
+						</LinkStyled>
+					</Item> : null
+				}
+				
 			</Nav>
 		</NavContainer>
 	);

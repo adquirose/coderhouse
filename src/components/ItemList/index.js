@@ -1,18 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Item from "../Item";
-import { ItemListStyle } from "./styles";
+import { Row } from 'reactstrap'
 const ItemList = ({ data }) => {
-	useEffect(() => {
-		console.log(data)
-	},[data])
 	return (
-		<ItemListStyle>
+		<Row className="pt-4">
 			{ data.map((item) => {
 				return <Item key={item.id} {...item} />;
 				})
 			}
 			
-		</ItemListStyle>
+		</Row>
 	);
 };
 export default ItemList;

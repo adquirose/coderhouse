@@ -3,7 +3,7 @@ import Icon from "./Icon";
 
 function ClearCart(props) {
 	return (
-		<Icon size={props.size} color={props.color}>
+		<Icon size={props.size} color={props.color} className={props.className}>
 			<g fill="#000000" stroke={props.color} strokeLinecap="square" strokeWidth="2">
                 <polyline fill="none" points="43.322,18.811 41,31 13,31 8,3 2,3 " stroke={props.color} strokeLinecap="butt"/>
                 <circle cx="15" cy="41" fill="none" r="4"/>

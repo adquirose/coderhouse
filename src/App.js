@@ -10,7 +10,7 @@ import Styled from "styled-components";
 
 const AppContainer = Styled.div`
   display:grid;
-  grid-template:[top] 100px [row1] 1fr [bottom] / [izq] 50px [col1] 1fr [col2] 50px [der];
+  grid-template:[top] 100px [row1] 1fr [bottom] / [izq] 1fr [der];
   width:100vw;
   height:100%;
   min-height:100vh;

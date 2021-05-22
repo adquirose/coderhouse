@@ -1,48 +1,71 @@
 import React from "react";
-import { LinkStyled } from '../ItemDetail/styles'
-import { ItemCountContainerStyle, Button, Span } from "./styles";
-
-function ItemCount({ counter, stockItem, column, row, onSumar, onRestar, onAdd, cart }) {
-	const isDisabledSub = counter === 0 ? true : false;
+import { Link } from 'react-router-dom'
+// import { LinkStyled } from '../ItemDetail/styles'
+// import { ItemCountContainerStyle, Button, Span } from "./styles";
+import { Container, Row, Col, Button} from 'reactstrap'
+function ItemCount({ counter, stockItem, onSumar, onRestar, onAdd, cart, clearCount }) {
+	const isDisabled = counter === 0 ? true : false;
 	const isDisabledAdd = stockItem === 0 ? true : false;
+	
 	return (
-		<ItemCountContainerStyle row={row} column={column}>
-			<Span row="top/row1" column="izq/der">
-				Stock: {stockItem}
-			</Span>
-
-			<Button
-				column="izq/col1"
-				onClick={onSumar}
-				disabled={isDisabledAdd}
-				icon
-			>
-				+
-			</Button>
-			<Span row="row1/bottom" column="col1/col2">
-				{counter}
-			</Span>
-			<Button
-				column="col2/der"
-				onClick={onRestar}
-				disabled={isDisabledSub}
-				icon
-			>
-				-
-			</Button>
-			<Button
-			 onClick={() => onAdd(counter)}
-			>
-				Agregar al carro
-			</Button>
-			{cart.length > 0 &&
-				<Button> 
-					<LinkStyled to='/cart'>
-						Terminar Compra
-					</LinkStyled> 
-				</Button> 
-			}
-		</ItemCountContainerStyle>
+		<Container >
+			<Row>
+				<Row className="justify-content-center">
+					<Col sm="6" className="text-center">
+						<span>
+							Stock: {stockItem}
+						</span>
+					</Col>
+				</Row>
+				<Row className="justify-content-center align-items-center">
+					<Col className="col-auto">
+						<Button
+							className="btn rounded-circle"
+							onClick={onRestar}
+							disabled={isDisabled}
+						>
+							-
+						</Button>
+					</Col>
+					<Col className="col-auto">
+						<span>
+							{counter}
+						</span>
+					</Col>
+					<Col className="col-auto">
+						<Button
+							className="btn rounded-circle"
+							onClick={onSumar}
+							disabled={isDisabledAdd}
+						>
+							+
+						</Button>
+					</Col>
+				</Row>
+				<Row className="justify-content-center pt-3">
+					<Col sm="6">
+						<Button
+						onClick={() => {
+							onAdd(counter)
+							clearCount()
+						}}
+						disabled={isDisabled}
+						>
+							Agregar al carro
+						</Button>
+					</Col>
+					<Col sm="6">
+						{cart.length > 0 &&
+							<Link to='/cart'>
+								<Button> 
+									Terminar Compra
+								</Button> 
+							</Link> 
+						}
+					</Col>
+				</Row>
+			</Row>
+		</Container>
 	);
 }
 export default ItemCount;

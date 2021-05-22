@@ -1,30 +1,23 @@
 import React from "react";
-import {
-	ItemStyle,
-	ImageThumb,
-	Span,
-	ButtonGroup,
-	TextGroup,
-	Button,
-	LinkStyled,
-} from "./styles";
-// import ItemCountContainer from "../ItemCountContainer";
+import { Link } from 'react-router-dom'
+import { Col, Card, CardImg, CardText, CardBody, CardTitle, Button } from 'reactstrap'
 
-function Item({ id, title, stock, image, price }) {
+function Item({ id, title, image, price }) {
 	return (
-		<ItemStyle>
-			<ImageThumb src={image} />
-			<TextGroup>
-				<Span>{title}</Span>
-				<Span size="1rem">valor: ${price}</Span>
-			</TextGroup>
-			{/* <ItemCountContainer column="izq/der" row="row2/row3" stock={stock} /> */}
-			<ButtonGroup>
-				<Button>
-					<LinkStyled to={`/item/${id}`}>Ver Detalle</LinkStyled>
-				</Button>
-			</ButtonGroup>
-		</ItemStyle>
+		<Col sm="3">
+			<Card>
+				<CardImg src={image} alt={`alt${image}`} />
+				<CardBody>
+					<CardTitle tag="h5">{title}</CardTitle>
+					<CardText>
+						Valor: ${price}
+					</CardText>
+					<Button>
+						<Link to={`/item/${id}`}>Ver Detalle</Link>
+					</Button>
+				</CardBody>
+			</Card>		
+		</Col>
 	);
 }
 export default Item;

@@ -11,10 +11,11 @@ function ItemDetailContainer() {
 	const { id } = useParams();
 	const [dataItem, setDataItem] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-
+	
 	const onAdd = counter => {
 		addItem( dataItem, counter)
 	}
+	
 	useEffect(() => {
 		const db = getFirestore()
 		const item = db.collection('items').doc(id)
@@ -33,7 +34,7 @@ function ItemDetailContainer() {
 				setIsLoading(false)
 			})
 	}, [id]);
-
+	
 	return (
 		<ItemListContainerStyle>
 			{ isLoading && <Loader /> }
