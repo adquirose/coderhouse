@@ -1,20 +1,9 @@
 import React from "react";
-import "./styles.css";
 
 const Loader = () => {
 	return (
-		<div
-			style={{
-				display: "grid",
-				justifyContent: "center",
-				alignItems: "center",
-				height: "100%",
-			}}
-		>
-			<div className="lds-ripple">
-				<div></div>
-				<div></div>
-			</div>
+		<div className="d-flex justify-content-center align-items-center pb-4">
+			<div className="spinner-border" style={{width: '3rem', height:'3rem'}} role="status" />
 		</div>
 	);
 };

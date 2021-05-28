@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "../ItemDetail";
-import Loader from "../Loader";
-import { ItemListContainerStyle } from "../ItemListContainer/styles";
-import { CartContext } from '../CartContext'
-import { getFirestore } from '../Firebase'
+import { useCartContext } from '../CartContext'
+import { getFirestore } from '../Firebase/firebase' 
+import { Container } from 'reactstrap'
 
 function ItemDetailContainer() {
-	const { cart, addItem, isInCart } = useContext(CartContext)
+	const { cart, addItem, isInCart } = useCartContext()
 	const { id } = useParams();
 	const [dataItem, setDataItem] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -36,10 +35,10 @@ function ItemDetailContainer() {
 	}, [id]);
 	
 	return (
-		<ItemListContainerStyle>
-			{ isLoading && <Loader /> }
+		<Container>
+			{ isLoading && <div class="spinner-border" role="status"/> }
 			{ !isLoading && dataItem && <ItemDetail {...dataItem} onAdd={onAdd} cart={cart} isInCart={isInCart}/> }
-		</ItemListContainerStyle>
+		</Container>
 	);
 }
 export default ItemDetailContainer;

@@ -1,13 +1,15 @@
-import React, { Fragment, useContext } from 'react'
-import { CartContext } from '../CartContext'
+import React, { Fragment } from 'react'
+import { useCartContext } from '../CartContext'
+import { useAuthContext } from '../Firebase/context'
 import { Container, Row, Col, Table, Button } from 'reactstrap'
 import { Remove } from '../Icons'
 import { Link } from 'react-router-dom'
 
 function Cart(){
-    const { cart, removeItem, clear, totalCompra } = useContext(CartContext)
+    const { cart, removeItem, clear, totalCompra } = useCartContext()
     const formatter = new Intl.NumberFormat('de-DE', {})
     const total = formatter.format(totalCompra())
+    const { currentUser } = useAuthContext()
     return(
         <Container>
             <Row>
@@ -28,34 +30,36 @@ function Cart(){
                                 </tr>
                             </thead>
                             <tbody>
-                                {cart.map( (item,index) => {
-                                    const valor = formatter.format(item.price)
-                                    const subTotal = formatter.format(item.price * item.quantity) 
-                                    return(
-                                        <tr key={index}>
-                                            <td>{item.id}</td>
-                                            <td>{item.title}</td>
-                                            <td>$ {valor}</td>
-                                            <td>{item.quantity}</td>
-                                            <td>$ {subTotal}</td>
-                                            <td><Button className="btn btn-sm rounded-circle" onClick={() => removeItem(item.id)}><Remove size="25"/></Button></td>
-                                        </tr>
-                                    )
-                                }
-                                    
-                                )}
+                            {cart.map( (item,index) => {
+                                const valor = formatter.format(item.price)
+                                const subTotal = formatter.format(item.price * item.quantity) 
+                                return(
+                                    <tr key={index}>
+                                        <td>{item.id}</td>
+                                        <td>{item.title}</td>
+                                        <td>$ {valor}</td>
+                                        <td>{item.quantity}</td>
+                                        <td>$ {subTotal}</td>
+                                        <td><Button className="btn btn-sm rounded-circle" onClick={() => removeItem(item.id)}><Remove size="25"/></Button></td>
+                                    </tr>
+                                )}   
+                            )}
                             </tbody>
                         </Table>
                         <Row>
                             <Col md="9">
                                <div>
                                     <Button
-                                        onClick={() => clear()}>
-                                           
-                                            Eliminar Carro
+                                        onClick={() => clear()}
+                                    >
+                                        Eliminar Carro
                                     </Button>
-                                    <Button>
-                                        Continuar Pago
+                                    <Button 
+                                        tag={Link} 
+                                        to={ currentUser ? '/checkout' : { pathname: '/signup', state: { fromCart: true }}} 
+                                        style={{marginTop: "1rem"}} 
+                                        block>
+                                            Iniciar la compra
                                     </Button>
                                </div>
                             </Col>
@@ -71,8 +75,7 @@ function Cart(){
                             <Button>Encuentra tu producto</Button>
                         </Link>
                     </Col>
-                )
-                }
+                )}
             </Row>
         </Container>
     )

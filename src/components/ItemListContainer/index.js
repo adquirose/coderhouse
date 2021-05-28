@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import ItemList from "../ItemList";
-import Loader from "../Loader";
-// import { ItemListContainerStyle } from "./styles.js";
-import { Container } from 'reactstrap'
-import { getFirestore } from '../Firebase'
 import { useParams } from "react-router-dom";
+import { getFirestore } from '../Firebase/firebase'
 
+import Loader from '../Loader'
 function ItemListContainer() {
 	const { id } = useParams();
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-
+	
 	useEffect(() => {
 		setIsLoading(true)
 		const db = getFirestore()
@@ -32,10 +30,11 @@ function ItemListContainer() {
 	}, [id]);
 
 	return (
-		<Container>
-			{ isLoading && <Loader /> }
+		<Fragment>
+			{ isLoading && <Loader />
+			}
 			{ !isLoading && data.length ? <ItemList data={data} /> : null }
-		</Container>
+		</Fragment>
 	);
 }
 export default ItemListContainer;
