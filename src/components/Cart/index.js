@@ -1,11 +1,11 @@
-import React, { Fragment, useContext } from 'react'
-import { CartContext } from '../CartContext'
+import React, { Fragment } from 'react'
+import { useCartContext } from '../CartContext'
 import { Container, Row, Col, Table, Button } from 'reactstrap'
 import { Remove } from '../Icons'
 import { Link } from 'react-router-dom'
 
 function Cart(){
-    const { cart, removeItem, clear, totalCompra } = useContext(CartContext)
+    const { cart, removeItem, clear, totalCompra } = useCartContext()
     const formatter = new Intl.NumberFormat('de-DE', {})
     const total = formatter.format(totalCompra())
     return(
@@ -54,7 +54,7 @@ function Cart(){
                                            
                                             Eliminar Carro
                                     </Button>
-                                    <Button>
+                                    <Button tag={Link} to='/checkout'>
                                         Continuar Pago
                                     </Button>
                                </div>

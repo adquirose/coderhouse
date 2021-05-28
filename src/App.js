@@ -7,6 +7,7 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import Cart from './components/Cart'
 import GlobalStyle from "./theme/globalStyle";
 import Styled from "styled-components";
+import Checkout from "./components/Checkout";
 
 const AppContainer = Styled.div`
   display:grid;
@@ -35,6 +36,9 @@ function App() {
 						</Route>
 						<Route path="/cart">
 							<Cart />
+						</Route>
+						<Route path="/checkout">
+							<Checkout />
 						</Route>
 					</Switch>
 				</AppContainer>
