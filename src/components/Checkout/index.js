@@ -66,8 +66,8 @@ function Checkout() {
         if(cart.length > 0){
             itemsToUpdate
             .get()
-            .then( docs => { 
-                docs.forEach((docSnapshot, idx) => {
+            .then( query => { 
+                query.docs.forEach((docSnapshot, idx) => {
                     if( docSnapshot.data().stock >= cart[idx].quantity){
                         batch.update(docSnapshot.ref, { stock: docSnapshot.data().stock - cart[idx].quantity })
                     }else{
@@ -80,6 +80,7 @@ function Checkout() {
             })
         } 
 	};
+    const isDisabled = userInfo.name === '' || userInfo.surname === '' || userInfo.phone === '' || userInfo.address === ''
 	const renderTable = () => {
 		return (
 			<Fragment>
@@ -191,7 +192,7 @@ function Checkout() {
 										/>
 									</Col>
 								</FormGroup>
-								<Button type="submit">Confirmar Compra</Button>
+								<Button disabled={isDisabled} type="submit">Confirmar Compra</Button>
 							</Form>
 						</Col>
 						<Col className="pt-5">{renderTable()}</Col>
