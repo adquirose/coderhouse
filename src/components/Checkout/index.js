@@ -1,286 +1,205 @@
-import React, { useState, useEffect } from "react";
-import firebase from "firebase/app";
-import { Redirect } from "react-router-dom";
+import React, { Fragment, useEffect, useState } from "react";
 import { useCartContext } from "../CartContext";
-import { useAuthContext } from "../Firebase/context";
-import provincias from "../../config/provincias.json";
-import { getFirestore } from "../Firebase/firebase";
 import {
 	Container,
 	Row,
-	Card,
 	Col,
 	Form,
 	FormGroup,
 	Label,
 	Input,
 	Button,
+	Table,
 } from "reactstrap";
-import CurrentUser from "../CurrentUser";
+import firebase from "firebase/app";
+import { getFirestore } from "../Firebase";
+import { Link } from "react-router-dom";
 
 function Checkout() {
-	const initialState = {
-		firstname: "",
+	const [userInfo, setUserInfo] = useState({
+		name: "",
 		surname: "",
+		email: "",
 		phone: "",
-		zip: "",
 		address: "",
-		address_2: "",
-		city: "",
-		state: "",
-	};
-	const { cart, clear, totalCompra } = useCartContext();
-	const { currentUser } = useAuthContext();
-
-	const [error, setError] = useState(null);
-	const [loading, setLoading] = useState(false);
-
-	const [order, setOrder] = useState(null);
-	const [dataForm, setDataForm] = useState({ initialState });
-
-	const [userData, setUserData] = useState({});
-
-	const filterCart = cart.map((item) => {
-		return {
-			id: item.id,
-			price: item.price,
-			quantity: item.quantity,
-			title: item.title,
-		};
 	});
+	const [orderId, setOrderId] = useState("");
+	const { cart, totalCompra, clear } = useCartContext();
+	const onChangeInput = (e) => {
+		setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+	};
 
 	useEffect(() => {
-		const db = getFirestore();
-		const userCollection = db.collection("users");
+		console.log(cart);
+	}, [cart]);
 
-		userCollection
-			.where("uid", "==", currentUser.uid)
-			.get()
-			.then((querySnapshot) => {
-				if (querySnapshot.size === 0) {
-					console.log("[Checkout] No data found for this user");
-				}
-				setUserData(querySnapshot.docs.map((doc) => doc.data())[0]);
-			})
-			.catch((err) => {
-				console.log("[Checkout] Error searching user data.", err);
-			});
-	}, [currentUser]);
-
-	const handleSubmit = (evt) => {
-		evt.preventDefault();
-		evt.stopPropagation();
-
-		setLoading(true);
-		setUserData(userData);
-		let buyer = {
-			name: dataForm.firstname,
-			surname: dataForm.surname,
-			phone: dataForm.phone,
-			uid: currentUser.uid,
-			address: dataForm.address,
-			address_2: dataForm.address_2,
-			city: dataForm.city,
-			state: dataForm.state,
-			zip: dataForm.zip,
-		};
-		const newOrder = {
-			buyer: buyer,
-			items: filterCart,
-			date: firebase.firestore.Timestamp.fromDate(new Date()),
-			total: totalCompra(),
-			status: "Generada",
-		};
+	const handleSubmit = (e) => {
+		e.preventDefault();
 		const db = getFirestore();
 		const orders = db.collection("orders");
-		const users = db.collection("users");
+		const newOrder = {
+			buyer: userInfo,
+			items: cart,
+			date: firebase.firestore.Timestamp.fromDate(new Date()),
+			total: totalCompra(),
+		};
+        const batch = db.batch();
+		const outOfStock = [];
+	    const itemsToUpdate = db.collection("items").where(firebase.firestore.FieldPath.documentId(), 'in', cart.map(i => i.id))
+        
 		orders
 			.add(newOrder)
-			.then((res) => {
-				setOrder({
-					id: res.id,
-					details: newOrder,
-				});
-			})
-			.then(() => {
-				const batch = db.batch();
-				const outOfStock = [];
-				const itemsToUpdate = db.collection("items");
-				itemsToUpdate
-					.where(
-						firebase.firestore.FieldPath.documentId(),
-						"in",
-						cart.map((item) => item.id)
-					)
-					.get()
-					.then((query) => {
-						query.docs.forEach((docSnapshot, idx) => {
-							if (docSnapshot.data().stock >= cart[idx].quantity) {
-								batch.update(docSnapshot.ref, {
-									stock: docSnapshot.data().stock - cart[idx].quantity,
-								});
-							} else {
-								outOfStock.push({ ...docSnapshot.data(), id: docSnapshot.id });
-							}
-						});
-					});
-				if (outOfStock.length === 0) {
-					batch.commit();
-				}
-			})
-			.catch((err) => {
-				console.log("ha ocurrido un error al crear la orden: ", err);
-				setError(err);
+			.then(({ id }) => {
+				setOrderId(id);
+				clear();
+			}).then(() => {
+
+            })
+			.catch((error) => {
+				console.log(`no se creo la orden ${error}`);
 			})
 			.finally(() => {
-				setLoading(false);
-				clear();
+				setUserInfo({});
+				
 			});
-
-		users
-			.where("uid", "==", buyer.uid)
-			.get()
-			.then((querySnapshot) => {
-				querySnapshot.forEach((doc) => users.doc(doc.id).update(buyer));
-			})
-			.catch((err) => {
-				console.log("[Checkout] Error updating user.", err);
-			});
+        
+        if(cart.length > 0){
+            itemsToUpdate
+            .get()
+            .then( query => { 
+                query.docs.forEach((docSnapshot, idx) => {
+                    if( docSnapshot.data().stock >= cart[idx].quantity){
+                        batch.update(docSnapshot.ref, { stock: docSnapshot.data().stock - cart[idx].quantity })
+                    }else{
+                        outOfStock.push({ ...docSnapshot.data(), id: docSnapshot.id })
+                    }
+                })
+                if(outOfStock.length === 0){
+                    batch.commit()
+                }
+            })
+        } 
 	};
-
-	const onChangeInput = (evt) => {
-		setDataForm({ ...dataForm, [evt.target.name]: evt.target.value });
-		console.log(dataForm);
+    const isDisabled = userInfo.name === '' || userInfo.surname === '' || userInfo.phone === '' || userInfo.address === ''
+	const renderTable = () => {
+		return (
+			<Fragment>
+				{cart.length > 0 ? (
+					<Table>
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Producto</th>
+								<th>Cantidad</th>
+								<th>Precio</th>
+							</tr>
+						</thead>
+						<tbody>
+							{cart.length &&
+								cart.map((item, index) => (
+									<tr key={index}>
+										<th scope="row">{index}</th>
+										<td>{item.title}</td>
+										<td>{item.quantity}</td>
+										<td>{item.price}</td>
+									</tr>
+								))}
+						</tbody>
+					</Table>
+				) : (
+					<p>No hay items en el carro</p>
+				)}
+			</Fragment>
+		);
 	};
-
 	return (
-		<div>
-			<h1>Checkout</h1>
-			{currentUser && <CurrentUser />}
-			{!!order ? (
-				<Redirect to={`/order/${order.id}`} />
-			) : (
-				<Container>
+		<Fragment>
+			{orderId ? (
+				<Container className="d-flex justify-content-center align-items-center">
 					<Row>
-						<Card>
-							<FormCheckOut onSubmit={handleSubmit} onChangeInput={onChangeInput} dataForm={dataForm} />
-						</Card>
+						<Col>
+							<h3 className="text-center">Compra Exitosa</h3>
+							<p>tu numero de orden: {orderId}</p>
+							<Button tag={Link} to="/">
+								Volver
+							</Button>
+						</Col>
+					</Row>
+				</Container>
+			) : (
+				<Container className="align-items-center">
+					<Row>
+						<Col>
+							<h4>Ckeckout</h4>
+							<Form onSubmit={handleSubmit}>
+								<FormGroup row>
+									<Col sm="12">
+										<Label>Nombre</Label>
+										<Input
+											name="name"
+											type="text"
+											value={userInfo.name}
+											onChange={onChangeInput}
+											placeholder="Nombre"
+										/>
+									</Col>
+								</FormGroup>
+								<FormGroup row>
+									<Col sm="12">
+										<Label>Apellido</Label>
+										<Input
+											name="surname"
+											type="text"
+											value={userInfo.surname}
+											onChange={onChangeInput}
+											placeholder="Apellido"
+										/>
+									</Col>
+								</FormGroup>
+								<FormGroup row>
+									<Col sm="12">
+										<Label>Email</Label>
+										<Input
+											name="email"
+											type="email"
+											value={userInfo.email}
+											onChange={onChangeInput}
+											placeholder="Correo electronico"
+										/>
+									</Col>
+								</FormGroup>
+								<FormGroup row>
+									<Col sm="12">
+										<Label>Dirección</Label>
+										<Input
+											name="address"
+											type="text"
+											value={userInfo.address}
+											onChange={onChangeInput}
+											placeholder="Dirección "
+										/>
+									</Col>
+								</FormGroup>
+								<FormGroup row>
+									<Col sm="12">
+										<Label>Telefono</Label>
+										<Input
+											name="phone"
+											type="number"
+											value={userInfo.phone}
+											onChange={onChangeInput}
+											placeholder="Numero de telefono"
+										/>
+									</Col>
+								</FormGroup>
+								<Button disabled={isDisabled} type="submit">Confirmar Compra</Button>
+							</Form>
+						</Col>
+						<Col className="pt-5">{renderTable()}</Col>
 					</Row>
 				</Container>
 			)}
-		</div>
+		</Fragment>
 	);
 }
 export default Checkout;
-
-const FormCheckOut = ({onChangeInput, dataForm, onSubmit}) => {
-	return (
-		<Form onSubmit={onSubmit}>
-			<FormGroup row>
-				<Col>
-					<Label>Nombre</Label>
-					<Input
-						name="firstname"
-						required
-						type="text"
-						placeholder="Nombre"
-						onChange={onChangeInput}
-						value={dataForm.firstname}
-					/>
-				</Col>
-				<Col>
-					<Label>Apellido</Label>
-					<Input
-						name="surname"
-						required
-						type="text"
-						placeholder="Apellido"
-						onChange={onChangeInput}
-						value={dataForm.surname}
-					/>
-				</Col>
-			</FormGroup>
-			<FormGroup row>
-				<Col>
-					<Label>Teléfono</Label>
-					<Input
-						name="phone"
-						required
-						type="tel"
-						placeholder="Teléfono"
-						onChange={onChangeInput}
-						value={dataForm.phone}
-					/>
-				</Col>
-				<Col>
-					<Label>Código Postal</Label>
-					<Input
-						name="zip"
-						required
-						type="tel"
-						placeholder="1234"
-						onChange={onChangeInput}
-						value={dataForm.zip}
-					/>
-				</Col>
-			</FormGroup>
-
-			<FormGroup row>
-				<Label>Dirección</Label>
-				<Input
-					name="address"
-					required
-					placeholder="Av. Siempreviva 742"
-					onChange={onChangeInput}
-					value={dataForm.address}
-				/>
-			</FormGroup>
-
-			<FormGroup row>
-				<Label>Dirección 2</Label>
-				<Input
-					name="address_2"
-					placeholder="Piso, departamento, lote"
-					onChange={onChangeInput}
-					value={dataForm.address_2}
-				/>
-			</FormGroup>
-
-			<FormGroup>
-				<Col>
-					<Label>Ciudad/Localidad</Label>
-					<Input
-						name="city"
-						required
-						placeholder="Ciudad"
-						onChange={onChangeInput}
-						value={dataForm.city}
-					/>
-				</Col>
-
-				<Col>
-					<Label>Provincia</Label>
-					<Input
-						name="state"
-						required
-						type="select"
-						id="exampleSelect"
-						onChange={onChangeInput}
-						value={dataForm.state}
-					>
-						<option disabled value="">
-							Seleccionar...
-						</option>
-						{provincias.data.map((provincia, i) => (
-							<option key={i}>{provincia.name}</option>
-						))}
-					</Input>
-				</Col>
-			</FormGroup>
-
-			<Button variant="warning" type="submit" block>
-				FINALIZAR MI COMPRA
-			</Button>
-		</Form>
-	);
-};

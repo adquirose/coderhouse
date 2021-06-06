@@ -9,10 +9,7 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import GlobalStyle from "./theme/globalStyle";
 import Styled from "styled-components";
-import SignUp from "./components/SignUp";
-import SignIn from "./components/SignIn";
-import OrderDetail from './components/OrderDetail'
-import PrivateRoute from './components/PrivateRoute'
+import Checkout from "./components/Checkout";
 
 const AppContainer = Styled.div`
   display:grid;
@@ -25,39 +22,29 @@ const AppContainer = Styled.div`
 function App() {
 	return (
 		<CartContextProvider value={[]}>
-			<AuthContextProvider>
-				<BrowserRouter>
-					<GlobalStyle />
-					<AppContainer>
-						<Navbar />
-						<Switch>
-							<Route exact path="/">
-								<ItemListContainer />
-							</Route>
-							<Route path="/item/:id">
-								<ItemDetailContainer />
-							</Route>
-							<Route path="/category/:id">
-								<ItemListContainer />
-							</Route>
-							<Route path="/order/:id">
-								<OrderDetail />
-							</Route>
-							<Route path="/cart">
-								<Cart />
-							</Route>
-							<PrivateRoute exact component={Checkout} path="/checkout" />
-							<PrivateRoute exact path="/order/:id" component={OrderDetail} />
-							<Route path="/signup">
-								<SignUp />
-							</Route>
-							<Route path="/signin">
-								<SignIn />
-							</Route>
-						</Switch>
-					</AppContainer>
-				</BrowserRouter>
-			</AuthContextProvider>
+			<BrowserRouter>
+				<GlobalStyle />
+				<AppContainer>
+					<Navbar />
+					<Switch>
+						<Route exact path="/">
+							<ItemListContainer />
+						</Route>
+						<Route path="/item/:id">
+							<ItemDetailContainer />
+						</Route>
+						<Route path="/category/:id">
+							<ItemListContainer />
+						</Route>
+						<Route path="/cart">
+							<Cart />
+						</Route>
+						<Route path="/checkout">
+							<Checkout />
+						</Route>
+					</Switch>
+				</AppContainer>
+			</BrowserRouter>
 		</CartContextProvider>
 	);
 }

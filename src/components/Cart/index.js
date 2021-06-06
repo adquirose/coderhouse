@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import { useCartContext } from '../CartContext'
-import { useAuthContext } from '../Firebase/context'
 import { Container, Row, Col, Table, Button } from 'reactstrap'
 import { Remove } from '../Icons'
 import { Link } from 'react-router-dom'
@@ -54,12 +53,8 @@ function Cart(){
                                     >
                                         Eliminar Carro
                                     </Button>
-                                    <Button 
-                                        tag={Link} 
-                                        to={ currentUser ? '/checkout' : { pathname: '/signup', state: { fromCart: true }}} 
-                                        style={{marginTop: "1rem"}} 
-                                        block>
-                                            Iniciar la compra
+                                    <Button tag={Link} to='/checkout'>
+                                        Continuar Pago
                                     </Button>
                                </div>
                             </Col>
