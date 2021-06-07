@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import CartContextProvider from "./components/CartContext";
-import {AuthContextProvider} from './components/Firebase/context'
 import Navbar from "./components/Navbar";
 import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
@@ -9,7 +8,6 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import GlobalStyle from "./theme/globalStyle";
 import Styled from "styled-components";
-import Checkout from "./components/Checkout";
 
 const AppContainer = Styled.div`
   display:grid;

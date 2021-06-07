@@ -1,18 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useCartContext } from "../CartContext";
-import {
-	Container,
-	Row,
-	Col,
-	Form,
-	FormGroup,
-	Label,
-	Input,
-	Button,
-	Table,
-} from "reactstrap";
+import { Container, Row, Col, Form, FormGroup, Label, Input, Button, Table } from "reactstrap";
 import firebase from "firebase/app";
-import { getFirestore } from "../Firebase";
+import { getFirestore } from "../Firebase/firebase";
 import { Link } from "react-router-dom";
 
 function Checkout() {

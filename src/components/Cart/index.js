@@ -8,7 +8,6 @@ function Cart(){
     const { cart, removeItem, clear, totalCompra } = useCartContext()
     const formatter = new Intl.NumberFormat('de-DE', {})
     const total = formatter.format(totalCompra())
-    const { currentUser } = useAuthContext()
     return(
         <Container>
             <Row>
