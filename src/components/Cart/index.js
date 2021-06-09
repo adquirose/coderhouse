@@ -8,59 +8,69 @@ function Cart(){
     const { cart, removeItem, clear, totalCompra } = useCartContext()
     const formatter = new Intl.NumberFormat('de-DE', {})
     const total = formatter.format(totalCompra())
+    
     return(
-        <Container>
-            <Row>
-                <h2>Tus productos</h2>
+        <Container className="pt-5">
+            <Row className="pb-4">
+                <h2 className="text-white text-center">Tus productos</h2>
             </Row>
-            <Row>
+            <Row className="justify-content-center">
                 {cart.length ? (
                     <Fragment>
-                        <Table>
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nombre Producto</th>
-                                    <th>Valor Unidad</th>
-                                    <th>Cantidad</th>
-                                    <th>Sub total</th>
-                                    <th>Borrar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {cart.map( (item,index) => {
-                                const valor = formatter.format(item.price)
-                                const subTotal = formatter.format(item.price * item.quantity) 
-                                return(
-                                    <tr key={index}>
-                                        <td>{item.id}</td>
-                                        <td>{item.title}</td>
-                                        <td>$ {valor}</td>
-                                        <td>{item.quantity}</td>
-                                        <td>$ {subTotal}</td>
-                                        <td><Button className="btn btn-sm rounded-circle" onClick={() => removeItem(item.id)}><Remove size="25"/></Button></td>
+                        <Col md="9">
+                            <Table className="bg-white">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Producto</th>
+                                        <th>Valor</th>
+                                        <th>Cantidad</th>
+                                        <th>Sub total</th>
+                                        <th>Borrar</th>
                                     </tr>
-                                )}   
-                            )}
-                            </tbody>
-                        </Table>
-                        <Row>
-                            <Col md="9">
-                               <div>
-                                    <Button
-                                        onClick={() => clear()}
-                                    >
-                                        Eliminar Carro
-                                    </Button>
-                                    <Button tag={Link} to='/checkout'>
-                                        Continuar Pago
-                                    </Button>
-                               </div>
+                                </thead>
+                                <tbody>
+                                {cart.map( (item,index) => {
+                                    const valor = formatter.format(item.price)
+                                    const subTotal = formatter.format(item.price * item.quantity)
+                                    const nuevoId = item.id.substring(0,6)
+                                    return(
+                                        <tr key={index}>
+                                            <td>{nuevoId}</td>
+                                            <td>{item.title}</td>
+                                            <td>$ {valor}</td>
+                                            <td>{item.quantity}</td>
+                                            <td>$ {subTotal}</td>
+                                            <td><Button className="btn btn-sm rounded-circle" onClick={() => removeItem(item.id)}><Remove size="25"/></Button></td>
+                                        </tr>
+                                    )}   
+                                )}
+                                </tbody>
+                            </Table>
+                        </Col>
+                        
+                            <Col className="pt-4" md="9">
+                               <Row className="d-flex justify-content-start">
+                                   <Col className="col-auto">
+                                        <Button
+                                            onClick={() => clear()}
+                                        >
+                                            Eliminar Carrito
+                                        </Button>
+                                   </Col>
+                                   <Col className="col-auto">
+                                        <Button
+                                            tag={Link} to='/checkout'>
+                                            Continuar Pago
+                                        </Button>
+                                   </Col>
+                                   <Col>
+                                        <p style={{fontSize:'1.5rem', textAlign:'end'}}>Total  ${total}</p>
+                                    </Col>
+                               </Row>
                             </Col>
-                            <Col md="3">
-                                <p>Total  ${total}</p>
-                            </Col>
-                        </Row>
+                            
+                        
                     </Fragment>
                 ):( 
                     <Col>

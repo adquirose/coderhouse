@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useCartContext } from "../CartContext";
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button, Table } from "reactstrap";
+import { Container, Row, Col, Form, FormGroup, Label, Input, Button, ButtonGroup, Table } from "reactstrap";
 import firebase from "firebase/app";
 import { getFirestore } from "../Firebase/firebase";
 import { Link } from "react-router-dom";
@@ -9,7 +9,8 @@ function Checkout() {
 	const [userInfo, setUserInfo] = useState({
 		name: "",
 		surname: "",
-		email: "",
+		email1: "",
+		email2:'',
 		phone: "",
 		address: "",
 	});
@@ -70,7 +71,10 @@ function Checkout() {
             })
         } 
 	};
-    const isDisabled = userInfo.name === '' || userInfo.surname === '' || userInfo.phone === '' || userInfo.address === ''
+    const isDisabled = userInfo.email1 !== userInfo.email2 || userInfo.name === '' || userInfo.surname === '' || 
+		userInfo.phone === '' || userInfo.email1 === '' || userInfo.email2  === '' || userInfo.address === ''
+		
+	
 	const renderTable = () => {
 		return (
 			<Fragment>
@@ -78,7 +82,6 @@ function Checkout() {
 					<Table>
 						<thead>
 							<tr>
-								<th>#</th>
 								<th>Producto</th>
 								<th>Cantidad</th>
 								<th>Precio</th>
@@ -88,7 +91,6 @@ function Checkout() {
 							{cart.length &&
 								cart.map((item, index) => (
 									<tr key={index}>
-										<th scope="row">{index}</th>
 										<td>{item.title}</td>
 										<td>{item.quantity}</td>
 										<td>{item.price}</td>
@@ -103,7 +105,7 @@ function Checkout() {
 		);
 	};
 	return (
-		<Fragment>
+		<div className="pt-5">
 			{orderId ? (
 				<Container className="d-flex justify-content-center align-items-center">
 					<Row>
@@ -117,9 +119,9 @@ function Checkout() {
 					</Row>
 				</Container>
 			) : (
-				<Container className="align-items-center">
-					<Row>
-						<Col>
+				<Container>
+					<Row className="justify-content-evenly">
+						<Col md="6" className="bg-white p-3 rounded">
 							<h4>Ckeckout</h4>
 							<Form onSubmit={handleSubmit}>
 								<FormGroup row>
@@ -150,11 +152,23 @@ function Checkout() {
 									<Col sm="12">
 										<Label>Email</Label>
 										<Input
-											name="email"
+											name="email1"
 											type="email"
-											value={userInfo.email}
+											value={userInfo.email1}
 											onChange={onChangeInput}
 											placeholder="Correo electronico"
+										/>
+									</Col>
+								</FormGroup>
+								<FormGroup row>
+									<Col sm="12">
+										<Label>Repite Email</Label>
+										<Input
+											name="email2"
+											type="email"
+											value={userInfo.email2}
+											onChange={onChangeInput}
+											placeholder="Repite Correo electronico"
 										/>
 									</Col>
 								</FormGroup>
@@ -182,14 +196,16 @@ function Checkout() {
 										/>
 									</Col>
 								</FormGroup>
-								<Button disabled={isDisabled} type="submit">Confirmar Compra</Button>
+								<ButtonGroup className="pt-2">
+									<Button color="primary" disabled={isDisabled} type="submit">Confirmar Compra</Button>
+								</ButtonGroup>
 							</Form>
 						</Col>
-						<Col className="pt-5">{renderTable()}</Col>
+						<Col md="5" className="bg-white rounded pt-3">{renderTable()}</Col>
 					</Row>
 				</Container>
 			)}
-		</Fragment>
+		</div>
 	);
 }
 export default Checkout;

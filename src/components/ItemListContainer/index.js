@@ -2,13 +2,14 @@ import React, { useState, useEffect, Fragment } from "react";
 import ItemList from "../ItemList";
 import { useParams } from "react-router-dom";
 import { getFirestore } from '../Firebase/firebase'
+import { CategoryNotFound } from '../NotFound'
 
 import Loader from '../Loader'
 function ItemListContainer() {
 	const { id } = useParams();
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	
+
 	useEffect(() => {
 		setIsLoading(true)
 		const db = getFirestore()
@@ -31,9 +32,9 @@ function ItemListContainer() {
 
 	return (
 		<Fragment>
-			{ isLoading && <Loader />
-			}
-			{ !isLoading && data.length ? <ItemList data={data} /> : null }
+			{ isLoading && <Loader /> }
+			{ !isLoading && data.length ? <ItemList data={data} /> : null } 
+			{ data.length === 0 &&  !isLoading && <CategoryNotFound />}
 		</Fragment>
 	);
 }

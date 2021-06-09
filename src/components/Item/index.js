@@ -12,8 +12,8 @@ function Item({ id, title, image, price }) {
 					<CardText>
 						Valor: ${price}
 					</CardText>
-					<Button>
-						<Link to={`/item/${id}`}>Ver Detalle</Link>
+					<Button tag={Link} to={`/item/${id}`}>
+						Ver Detalle
 					</Button>
 				</CardBody>
 			</Card>		

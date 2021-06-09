@@ -1,10 +1,13 @@
-import React from "react";
-import { Container, Row, Col, Nav, NavItem, NavLink, Button, Badge, InputGroup, Input } from 'reactstrap'
+import React, { useState } from "react";
+import { Container, Row, Col, Nav, NavItem, NavLink, Button, Badge, InputGroup, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import { ShoppingCart, Search } from "../Icons";
 import Logo from "../../assets/images/logo.png";
 import { useCartContext } from '../CartContext'
 import { Link } from 'react-router-dom'
 function Navbar() {
+	const [dropdownOpen, setDropdownOpen] = useState(false)
+	const toggle = () => setDropdownOpen(prevState => !prevState)
+
 	const { totalItems } = useCartContext()
 	return (
 		<div style={{background:'#1B998B'}}>
@@ -34,30 +37,48 @@ function Navbar() {
 				</Row>
 				<Row className="justify-content-between">
 					<Col sm="6">
-						<Nav>
+						<Nav className="justify-content-end">
 							<NavItem>
-								<NavLink tag={Link} to="/category/semillas">Semillas</NavLink>
+								<NavLink className="text-white">
+									Ofertas
+								</NavLink>
 							</NavItem>
-							<NavItem>
-								<NavLink tag={Link} to="/category/fungi">Fungi</NavLink>
-							</NavItem>
-							<NavItem>
-								<NavLink tag={Link} to="/category/arboles">Arboles</NavLink>
-							</NavItem>
+							<Dropdown isOpen={dropdownOpen} toggle={toggle}>
+								<DropdownToggle caret>
+									Categorias
+								</DropdownToggle>
+								<DropdownMenu>
+									<DropdownItem tag={Link} to="/category/arboles">Arboles</DropdownItem>
+									<DropdownItem tag={Link} to="/category/fungi">Funji</DropdownItem>
+									<DropdownItem tag={Link} to="/category/semillas">Semillas</DropdownItem>
+								</DropdownMenu>
+							</Dropdown>
 						</Nav>
 					</Col>
 					<Col sm="6">
-						<Nav>
-							{ totalItems() ? 	
+						<Nav className="justify-content-end">
 							<NavItem>
-								<NavLink tag={Link} to="/cart">
-									<Button color="primary">
-										<ShoppingCart size="20" color="white"/> 
-										<Badge color="secondary">{totalItems()}</Badge>
-									</Button>
+								<NavLink className="text-white">
+									Ingresa
 								</NavLink>
-							</NavItem> : null
-							}
+							</NavItem>
+							<NavItem>
+								<NavLink className="text-white">
+									Crear Cuenta
+								</NavLink>
+							</NavItem>
+							<NavItem>
+								{ totalItems() ? 	
+									<NavLink className="pt-0" tag={Link} to="/cart">
+										<Button color="primary">
+											<ShoppingCart size="20" color="white"/> 
+											<Badge color="secondary">{totalItems()}</Badge>
+										</Button>
+									</NavLink>:
+									null
+								}
+							</NavItem> 
+							
 						</Nav>
 					</Col>
 				</Row>
