@@ -1,6 +1,10 @@
 # Ecommerce - Entrega Final Curso React.js
 
+<<<<<<< HEAD
 ![]<img src="./demo.gif" width="100%" />
+=======
+- [Demo](./demo.gif)
+>>>>>>> d1d6606f2883561685eb65ff13b6c90982e64ee3
 
 Sitio E-commerce venta de Hongos y otros.
 
