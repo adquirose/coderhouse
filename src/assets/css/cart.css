@@ -1,0 +1,14 @@
+th{
+    text-align: center;
+}
+tr td{
+    text-align: center;
+    align-self: center;
+}
+td button{
+    border:0;
+    padding-top:0;
+    border-radius: 50%;
+    width: 30px;
+    height:30px;
+}

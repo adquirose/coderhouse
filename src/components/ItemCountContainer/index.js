@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ItemCount from "../ItemCount";
 
-function ItemCountContainer({stock, cart, onAdd, id, isInCart, ...props}) {
+function ItemCountContainer({ stock, cart, onAdd, id, isInCart, ...props }) {
 	const [counter, setCounter] = useState(0);
 	const [stockItem, setStockItem] = useState(0);
 
@@ -18,21 +18,19 @@ function ItemCountContainer({stock, cart, onAdd, id, isInCart, ...props}) {
 		}
 	};
 	const clearCount = () => {
-		setCounter(0)
-	}
-	
+		setCounter(0);
+	};
+
 	useEffect(() => {
-		isInCart(id) ?
-			cart.forEach(item => { 
-				if(item.id === id){
-					setStockItem(item.stock)
-				}
-			})
-			:
-			setStockItem(stock)
-			
-	},[id,stock, cart, isInCart]);
-	
+		isInCart(id)
+			? cart.forEach((item) => {
+					if (item.id === id) {
+						setStockItem(item.stock);
+					}
+			  })
+			: setStockItem(stock);
+	}, [id, stock, cart, isInCart]);
+
 	return (
 		<ItemCount
 			{...props}

@@ -1,36 +1,41 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Nav, NavItem, NavLink, Button, Badge, InputGroup, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
-import { ShoppingCart, Search } from "../Icons";
-import Logo from "../../assets/images/logo.png";
-import { useCartContext } from '../CartContext'
-import { Link } from 'react-router-dom'
-function Navbar() {
-	const [dropdownOpen, setDropdownOpen] = useState(false)
-	const toggle = () => setDropdownOpen(prevState => !prevState)
+import { Search } from "../Icons";
+import { Link } from "react-router-dom";
+import CartWidget from "../CartWidget";
+import {
+	Container,
+	Row,
+	Col,
+	Nav,
+	NavItem,
+	NavLink,
+	Button,
+	InputGroup,
+	Input,
+	Dropdown,
+	DropdownToggle,
+	DropdownMenu,
+	DropdownItem,
+} from "reactstrap";
 
-	const { totalItems } = useCartContext()
+
+function Navbar() {
+	const [dropdownOpen, setDropdownOpen] = useState(false);
+	const toggle = () => setDropdownOpen((prevState) => !prevState);
 	return (
-		<div style={{background:'#1B998B'}}>
+		<div style={{ background: "#1B998B" }}>
 			<Container>
 				<Row className="align-items-center">
-					<Col>
-						<Link to="/">
-							<img
-								src={Logo}
-								alt="logo"
-								style={{
-									height: "50px",
-									paddingTop: "10px",
-									paddingLeft: "0",
-								}}
-							/>
+					<Col className="mt-2">
+						<Link className="text-decoration-none" to="/">
+							<span className="text-white fs-3 fw-bold mb-2">MercadoFungi</span>
 						</Link>
 					</Col>
-					<Col sm="6">
-						<InputGroup>
+					<Col className="mt-2" sm="6">
+						<InputGroup size="sm">
 							<Input placeholder="Buscar semillas, hongos y más..." />
 							<Button onClick={() => alert("click button")}>
-								<Search size="25" color="white"/>
+								<Search size="25" color="white" />
 							</Button>
 						</InputGroup>
 					</Col>
@@ -39,18 +44,20 @@ function Navbar() {
 					<Col sm="6">
 						<Nav className="justify-content-end">
 							<NavItem>
-								<NavLink className="text-white">
-									Ofertas
-								</NavLink>
+								<NavLink className="text-white">Ofertas</NavLink>
 							</NavItem>
 							<Dropdown isOpen={dropdownOpen} toggle={toggle}>
-								<DropdownToggle caret>
-									Categorias
-								</DropdownToggle>
+								<DropdownToggle caret>Categorias</DropdownToggle>
 								<DropdownMenu>
-									<DropdownItem tag={Link} to="/category/arboles">Arboles</DropdownItem>
-									<DropdownItem tag={Link} to="/category/fungi">Funji</DropdownItem>
-									<DropdownItem tag={Link} to="/category/semillas">Semillas</DropdownItem>
+									<DropdownItem tag={Link} to="/category/arboles">
+										Arboles
+									</DropdownItem>
+									<DropdownItem tag={Link} to="/category/fungi">
+										Funji
+									</DropdownItem>
+									<DropdownItem tag={Link} to="/category/semillas">
+										Semillas
+									</DropdownItem>
 								</DropdownMenu>
 							</Dropdown>
 						</Nav>
@@ -58,27 +65,16 @@ function Navbar() {
 					<Col sm="6">
 						<Nav className="justify-content-end">
 							<NavItem>
-								<NavLink className="text-white">
-									Ingresa
-								</NavLink>
+								<NavLink className="text-white">Ingresa</NavLink>
 							</NavItem>
 							<NavItem>
-								<NavLink className="text-white">
-									Crear Cuenta
-								</NavLink>
+								<NavLink className="text-white">Crear Cuenta</NavLink>
 							</NavItem>
 							<NavItem>
-								{ totalItems() ? 	
-									<NavLink className="pt-0" tag={Link} to="/cart">
-										<Button color="primary">
-											<ShoppingCart size="20" color="white"/> 
-											<Badge color="secondary">{totalItems()}</Badge>
-										</Button>
-									</NavLink>:
-									null
-								}
-							</NavItem> 
-							
+								<NavLink className="pt-0">
+									<CartWidget />
+								</NavLink>
+							</NavItem>
 						</Nav>
 					</Col>
 				</Row>
