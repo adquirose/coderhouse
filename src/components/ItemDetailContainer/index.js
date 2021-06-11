@@ -1,49 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "../ItemDetail";
-import { ItemNotFound } from '../NotFound'
-import { useCartContext } from '../CartContext'
-import { getFirestore } from '../Firebase/firebase' 
-import { Container } from 'reactstrap'
+import { useCartContext } from "../CartContext";
+import { getFirestore } from "../Firebase/firebase";
+import Loader from "../Loader";
+import { ItemNotFound } from "../NotFound";
 
 function ItemDetailContainer() {
-
-	const { cart, addItem, isInCart } = useCartContext()
+	const { cart, addItem, isInCart } = useCartContext();
 	const { id } = useParams();
 	const [dataItem, setDataItem] = useState([]);
-	const [isLoading, setIsLoading] = useState(false)
-	const [notFound, setNotFound] = useState(false)
-	const onAdd = counter => {
-		addItem(dataItem, counter)
-	}
-	
+	const [isLoading, setIsLoading] = useState(false);
+	const [notFound, setNotFound] = useState(undefined);
+	const onAdd = (counter) => {
+		addItem(dataItem, counter);
+	};
+
 	useEffect(() => {
-		const db = getFirestore()
-		const item = db.collection('items').doc(id)
-		item.get()
+		const db = getFirestore();
+		const item = db.collection("items").doc(id);
+		item
+			.get()
 			.then((doc) => {
-				setIsLoading(true)
-				if(!doc.exists){
-					console.log('item no encontrado')
-					setNotFound(true)
-					return
+				setIsLoading(true);
+				if (!doc.exists) {
+					console.log("item no encontrado");
+					setNotFound(true);
+				} else {
+					setNotFound(false);
+					console.log("item found!");
+					setDataItem({ id: doc.id, ...doc.data() });
 				}
-				console.log('item found!')
-				setDataItem({id: doc.id, ...doc.data()})
 			})
 			.catch((error) => {
-				console.log(error)
-			}).finally(() => {
-				setIsLoading(false)
+				console.log(error);
 			})
+			.finally(() => {
+				setIsLoading(false);
+			});
 	}, [id]);
-	
+	const Detail = () =>
+		!notFound && !isLoading ? (
+			<ItemDetail {...dataItem} onAdd={onAdd} cart={cart} isInCart={isInCart} />
+		) : (
+			<ItemNotFound />
+		);
+
 	return (
-		<Container>
-			{ isLoading && <div className="spinner-border" role="status"/> }
-			{ !isLoading && dataItem && !notFound &&<ItemDetail {...dataItem} onAdd={onAdd} cart={cart} isInCart={isInCart}/> }
-			{ notFound && !isLoading && <ItemNotFound/>}
-		</Container>
+		<Fragment>
+			{notFound !== undefined ? <Detail /> : <Loader size="3rem" />}
+		</Fragment>
 	);
 }
 export default ItemDetailContainer;

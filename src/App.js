@@ -8,7 +8,7 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import GlobalStyle from "./theme/globalStyle";
 import Styled from "styled-components";
-
+import NotFound from "./components/NotFound";
 const AppContainer = Styled.div`
   display:grid;
   grid-template:[top] 100px [row1] 1fr [bottom] / [izq] 1fr [der];
@@ -34,11 +34,14 @@ function App() {
 						<Route exact path="/category/:id">
 							<ItemListContainer />
 						</Route>
-						<Route path="/cart">
+						<Route exact path="/cart">
 							<Cart />
 						</Route>
-						<Route path="/checkout">
+						<Route exact path="/checkout">
 							<Checkout />
+						</Route>
+						<Route path="/">
+							<NotFound />
 						</Route>
 					</Switch>
 				</AppContainer>
