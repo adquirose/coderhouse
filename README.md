@@ -1,10 +1,10 @@
 # Ecommerce - Entrega Final Curso React.js
 
-![]<img src="./demo.gif" width="100%" />
-
 Sitio E-commerce venta de Hongos y otros.
 
-## ejecutar el proyecto localmente
+![]<img src="./demo.gif" width="100%" />
+
+## Ejecutar el proyecto localmente
 
 Instalar Node.js : https://nodejs.org/dist/v16.0.0/node-v16.0.0-x64.msi
 
