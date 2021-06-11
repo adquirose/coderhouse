@@ -2,7 +2,7 @@
 
 Sitio E-commerce venta de Hongos y otros.
 
-![]<img src="./demo.gif" width="100%" />
+<img src="./demo.gif" width="100%" />
 
 ## Ejecutar el proyecto localmente
 
